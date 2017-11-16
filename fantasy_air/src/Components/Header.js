@@ -5,18 +5,19 @@ class Header extends Component {
 
 	render(){
 		return(
-				<div className="header">
+				<div className="header-container">
 					<div className="logo">
 						<h1>Fantasy Air</h1>
-						<h4>Fly Like a Champion</h4>
+						<p><em>Fly Like a Champion</em></p>
 					</div>
-					<div className="navBar">
-						<p></p>
+					<div className="header-links">
+						<h3>Team Data</h3>
+						<h3>Compare Players</h3>
+						<h3>About Air Yards</h3>
 					</div>
 				</div>
 			)
 	}
-
 }
 
 

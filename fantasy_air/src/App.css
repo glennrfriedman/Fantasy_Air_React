@@ -1,1 +1,91 @@
+/********************************** Body/Main Container **********************************/
+
+body {
+  margin: 0 auto;
+  font-family: Avenir;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 100vw;
+	height: 100vh;
+}
+
+/*********************************** Header **********************************/
+
+.header-container {
+flex: .25;
+background-color: #7c9b59;
+color: #ffffff;
+width: 100vw;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: flex-end;
+margin-bottom: 2%;
+}
+
+.logo {
+	flex: 1;
+	margin-left: 2%;
+}
+
+.header-links {
+	flex: .7;
+	display: flex;
+	justify-content: space-around;
+}
+
+/*********************************** search **********************************/
+.searchBar {
+	margin-right: 20px;	
+	border-radius: 10px;
+	background-color: rgba(142, 142, 147, 0.12);
+	width: 270px;
+	height: 36px;
+}
+
+.search-container {
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.searchResults {
+	text-align: center;
+	width: 270px;
+	background: grey;
+	border-radius: 5px;
+	z-index: 4;
+}
+
+/*********************************** Player Table Main **********************************/
+
+.data-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex: 1;
+}
+
+table tbody, table thead
+{
+    display: block;
+}
+
+table tbody 
+{
+   overflow-y: scroll;
+   height: 50vh;
+}
+
+th, td
+{
+   width: 5vw;
+}
+
+
 

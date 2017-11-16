@@ -6,8 +6,10 @@
     "axios": "^0.17.1",
     "cors": "^2.8.4",
     "react": "^16.1.1",
+    "react-bootstrap-table": "^4.1.4",
     "react-dom": "^16.1.1",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "tablesort": "^5.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

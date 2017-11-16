@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios';
 
 import Header from './Components/Header.js';
+import Playertable from './Components/Playertable.js'
 
 class App extends Component {
 
@@ -13,7 +14,8 @@ class App extends Component {
     this.state = {
       value: "",
       searchResults: [],
-      url: "http://localhost:3000/players"
+      url: "http://localhost:3000",
+      searched: false
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -23,16 +25,17 @@ class App extends Component {
   handleChange(event) {
     event.preventDefault();
     this.setState({
-      value: event.target.value
+      value: event.target.value, searched: true
     }, this.searchPlayers)
   }
 
   searchPlayers() {
     if (this.state.value === "") {
+      this.setState({searched: false})
       return
     }
     else {
-    axios.get(`${this.state.url}/${this.state.value}`)
+    axios.get(`${this.state.url}/players/${this.state.value}`)
     .then(res => {
       this.setState({searchResults: res.data})
       console.log('search results are ', res.data);
@@ -43,14 +46,13 @@ class App extends Component {
   displayPlayerResults() {
     let results = this.state.searchResults.search_results
     let renderSearch = []
-    console.log(results)
     if (this.state.searchResults.length === 0) {
       return
     }
     else {
       results.map(e => {
         renderSearch.push(    
-          <p>{e[0]} {e[2]} {e[1]}</p>
+          <p>{e[0]} ‧ {e[2]} ‧ {e[1]}</p>
           )
       })
     return renderSearch
@@ -59,13 +61,20 @@ class App extends Component {
 
   render() {
     return (
-        <div>
-        <Header />
-          <div className="search-bar">
-            <input className='searchBar' type='text' ref={el=>{this.search=el}} placeholder="Search Players" onChange={this.handleChange} />
-        </div>
-        <div> {this.displayPlayerResults()} </div>
-        </div>
+          <div className="container">
+            <Header />
+          <div className="data-container">
+            <div className="search-container">
+              <input className='searchBar' type='text' ref={el=>{this.search=el}} placeholder="Search Players" onChange={this.handleChange} />
+              <div className="searchResults"> {this.state.searched && this.displayPlayerResults()} </div>
+            </div>
+
+            <div className="weeklyData">
+              <Playertable url={this.state.url}/>
+            </div>
+
+            </div>
+          </div>
     );
   }
 }
