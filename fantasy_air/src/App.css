@@ -13,6 +13,13 @@ body {
 	height: 100vh;
 }
 
+/*********************************** Universal **********************************/
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
 /*********************************** Header **********************************/
 
 .header-container {
@@ -40,7 +47,6 @@ margin-bottom: 2%;
 
 /*********************************** search **********************************/
 .searchBar {
-	margin-right: 20px;	
 	border-radius: 10px;
 	background-color: rgba(142, 142, 147, 0.12);
 	width: 270px;
@@ -59,16 +65,27 @@ margin-bottom: 2%;
 	width: 270px;
 	background: grey;
 	border-radius: 5px;
+	position: fixed;
 	z-index: 4;
 }
 
 /*********************************** Player Table Main **********************************/
 
+.subHeader {
+	width: 85vw;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
 .data-container {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 	flex: 1;
+	overflow-y: scroll;
 }
 
 .oneWeekData {
@@ -78,17 +95,26 @@ margin-bottom: 2%;
 	align-items: center;
 }
 
-.viewSelect{
+.viewSelect {
 	display: flex;
-	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.viewSelect-item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0px 10px;
 }
 
 .viewSelect label {
 	font-size: 24px;
+	padding-right: 5px;
 }
 
 .playerTable {
-	width: 80vw;
+	width: 85vw;
 }
 
 .select-values {
@@ -101,6 +127,7 @@ margin-bottom: 2%;
 }
 
 .submitButton {
+	margin: 0px 10px;
 	width: 96px;
 	height: 27px;
 	border-radius: 6px;

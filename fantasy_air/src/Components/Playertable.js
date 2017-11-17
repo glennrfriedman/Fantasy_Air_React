@@ -1,20 +1,16 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-// import tablesort from 'tablesort';
-// import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
-import ReactTable from 'react-table'
-import "react-table/react-table.css";
 
-// this is doing something
-require('react-bootstrap-table/dist/react-bootstrap-table-all.min.css');
-// import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+import Header from './Header.js';
+import Search from './Search.js';
+import ReactTable from 'react-table';
+import "react-table/react-table.css";
 
 class Playertable extends Component {
 
 	constructor(props) {
 		super(props)
-		
-		 this.state = {
+		this.state = {
 	     position: 'All',
 	     showWeek: '',
 	     playerData: [],
@@ -91,8 +87,10 @@ class Playertable extends Component {
 	render() {
 		return (
 			<div className="oneWeekData">
-
+				<Header />
+				<div className="subHeader">
 				<form className='viewSelect' onSubmit={this.onSubmit}>
+				<div className="viewSelect-item">
 				<label htmlFor='positionSelect'>Position:</label>
 				<select className='select-values' id='positionSelect' name='position' value={this.state.position} onChange={this.onChange}>
 						<option defaultValue='all'>All</option>
@@ -100,31 +98,19 @@ class Playertable extends Component {
 						 <option value='TE'>TE</option>
 						 <option value='WR'>RB</option>
 				</select>
+				</div>
+				<div className="viewSelect-item">
 				<label htmlFor='weekSelect'>Week:</label>
 				<select className='select-values' id='weekSelect' name='week' value={this.state.week} onChange={this.onChange}>
-								{this.renderWeeks()}
-								{/*<option value='17'>17</option>
-								<option value='16'>16</option>
-								<option value='15'>15</option>
-								<option value='14'>14</option>
-								<option value='13'>13</option>
-								<option value='12'>12</option>
-								<option value='11'>11</option>
-								<option defaultValue='10'>10</option>
-								<option value='9'>9</option>
-								<option value='8'>8</option>
-								<option value='7'>7</option>
-								<option value='6'>6</option>
-								<option value='5'>5</option> 
-								<option value='4'>4</option>
-								<option value='3'>3</option>
-								<option value='2'>2</option>
-								<option value='1'>1</option>*/}
-					</select>
+							{this.renderWeeks()}
+				</select>
+				</div>
 					<div className='submit'>
 					<input className="submitButton" type='submit' value='Submit' />
 					</div>
 				</form>
+				<Search />
+				</div>
 
 				<div className='playerTable'>
         <ReactTable
@@ -197,7 +183,10 @@ class Playertable extends Component {
               ]
             }
           ]}
-          className="-striped -highlight"
+          showPaginationBottom={false}
+          showPaginationTop={true}
+					className=" -highlight"
+					defaultPageSize={10}
         />
         </div>
       </div>
