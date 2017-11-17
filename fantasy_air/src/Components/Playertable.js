@@ -33,63 +33,68 @@ class Playertable extends Component {
 		)
 	}
 
-	renderHeader() {
-    return (
-      <thead>
-        <tr>
-      		<th>Player</th>
-          <th>Position</th>
-          <th>Team</th>
-          <th data-sort-method='number'>Receptions</th>
-          <th data-sort-method='number'>Targets</th>
-          <th data-sort-method='number'>Rec. Yards</th>
-          <th data-sort-method='number'>YAC</th>
-          <th data-sort-method='number'>Air Yards</th>
-          <th data-sort-method='number'>AYPT</th>
-          <th data-sort-method='number'>RACR</th>
-          <th data-sort-method='number'>Team Attempts</th>
-          <th data-sort-method='number'>Target Share</th>
-          <th data-sort-method='number'>Team Air Yards</th>
-          <th data-sort-method='number'>MS Air Yards</th>
-          <th data-sort-method='number'>WOPR</th>
-        </tr>
-      </thead>
-    )
-  }
+	// renderHeader() {
+ //    return (
+ //      <thead>
+ //        <tr>
+ //      		<th>Player</th>
+ //          <th>Position</th>
+ //          <th>Team</th>
+ //          <th data-sort-method='number'>Receptions</th>
+ //          <th data-sort-method='number'>Targets</th>
+ //          <th data-sort-method='number'>Rec. Yards</th>
+ //          <th data-sort-method='number'>YAC</th>
+ //          <th data-sort-method='number'>Air Yards</th>
+ //          <th data-sort-method='number'>AYPT</th>
+ //          <th data-sort-method='number'>RACR</th>
+ //          <th data-sort-method='number'>Team Attempts</th>
+ //          <th data-sort-method='number'>Target Share</th>
+ //          <th data-sort-method='number'>Team Air Yards</th>
+ //          <th data-sort-method='number'>MS Air Yards</th>
+ //          <th data-sort-method='number'>WOPR</th>
+ //        </tr>
+ //      </thead>
+ //    )
+ //  }
 
-  renderTable() {
+ //  renderTable() {
 
-    const renderTable = [];
-    this.state.playerData.map(e => {
-      renderTable.push(
-        <tr className={e.id} key={e.id}>
-      		<td className='playerRow'>{e.full_name}</td>
-      		<td className='playerRow'>{e.position}</td>
-      		<td className='playerRow'>{e.team}</td>
-      		<td className='playerRow'>{Number(e.rec)}</td>
-      		<td className='playerRow'>{Number(e.tar)}</td>
-      		<td className='playerRow'>{Number(e.rec_yards)}</td>
-      		<td className='playerRow'>{Number(e.yac)}</td>
-      		<td className='playerRow'>{Number(e.air_yards)}</td>
-      		<td className='playerRow'>{Number(e.aypt)}</td>
-      		<td className='playerRow'>{Number(e.racr)}</td>
-      		<td className='playerRow'>{Number(e.tm_att)}</td>
-      		<td className='playerRow'>{Number(e.target_share)}</td>
-      		<td className='playerRow'>{Number(e.tm_airyards)}</td>
-      		<td className='playerRow'>{Number(e.ms_air_yards)}</td>
-      		<td className='playerRow'>{Number(e.wopr)}</td>
-        </tr>
-      )
-      return renderTable;
-    })
-    return renderTable;
-  }
+ //    const renderTable = [];
+ //    this.state.playerData.map(e => {
+ //      renderTable.push(
+ //        <tr className={e.id} key={e.id}>
+ //      		<td className='playerRow'>{e.full_name}</td>
+ //      		<td className='playerRow'>{e.position}</td>
+ //      		<td className='playerRow'>{e.team}</td>
+ //      		<td className='playerRow'>{Number(e.rec)}</td>
+ //      		<td className='playerRow'>{Number(e.tar)}</td>
+ //      		<td className='playerRow'>{Number(e.rec_yards)}</td>
+ //      		<td className='playerRow'>{Number(e.yac)}</td>
+ //      		<td className='playerRow'>{Number(e.air_yards)}</td>
+ //      		<td className='playerRow'>{Number(e.aypt)}</td>
+ //      		<td className='playerRow'>{Number(e.racr)}</td>
+ //      		<td className='playerRow'>{Number(e.tm_att)}</td>
+ //      		<td className='playerRow'>{Number(e.target_share)}</td>
+ //      		<td className='playerRow'>{Number(e.tm_airyards)}</td>
+ //      		<td className='playerRow'>{Number(e.ms_air_yards)}</td>
+ //      		<td className='playerRow'>{Number(e.wopr)}</td>
+ //        </tr>
+ //      )
+ //      return renderTable;
+ //    })
+ //    return renderTable;
+ //  }
 
 	render() {
+		// look into below later for player comparison - onSelect - compare players stats
+		// const selectRow = {
+  //   mode: 'checkbox',  // multi select
+  //   onSelect: this.handleRowSelect
+  // 	};
 		var selectRowProp = {
-  	mode: "checkbox",
-  	clickToSelect: true,
-  	bgColor: "rgb(238, 193, 213)" 
+  		mode: "checkbox",
+  		clickToSelect: true,
+  		bgColor: "rgb(238, 193, 213)" 
 		};
 		return (
 			<div className="oneWeekData">
