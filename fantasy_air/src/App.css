@@ -71,15 +71,24 @@ margin-bottom: 2%;
 	flex: 1;
 }
 
-table tbody, table thead
-{
-    display: block;
+.oneWeekData {
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-table tbody 
-{
-   overflow-y: scroll;
-   height: 50vh;
+.viewSelect{
+	display: flex;
+	flex-direction: row;
+}
+
+.viewSelect label {
+	font-size: 24px;
+}
+
+.playerTable {
+	width: 80vw;
 }
 
 .select-values {
@@ -91,6 +100,14 @@ table tbody
 	border: solid 1px #979797;
 }
 
+.submitButton {
+	width: 96px;
+	height: 27px;
+	border-radius: 6px;
+	background-image: linear-gradient(to bottom, #d8d8d8, #b3b3b3);
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), inset 0 2px 0 0 #ffffff;
+	border: solid 1px #979797;
+}
 
 
 
