@@ -28,6 +28,7 @@ class Home extends Component {
         <Route path="/teams" render={props => (<Team/>)}/>
         <Route path="/compare" render={props => (<Compare/>)}/>
         <Route path="/player/:full_name/:team" render={props => (<Player routeProps={props}/>)}/>
+        <Route path="/about" render={props => (<About/>)}/>
       </Switch>
     )
   }

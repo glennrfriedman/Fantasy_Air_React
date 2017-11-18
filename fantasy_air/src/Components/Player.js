@@ -31,56 +31,23 @@ componentDidMount(){
 	this.getPlayerData();
 }
 
+componentWillUnMount(){
+	this.getPlayerData();
+}
+
 getPlayerData(){
 	const { full_name, team } = this.props.routeProps.match.params
 	axios.get(`${this.state.url}/players/${full_name}/${team}`)
     .then(res => {
-    	const length = res.data.player_data.length
-    	const {team, full_name, position} = res.data.player_data[0]
-      this.setState({playerData: res.data, length: length, team: team, name: full_name, pos: position, gotData: true })
+    	const length = res.data.player_data.length;
+    	const {team, full_name, position} = res.data.player_data[0];
+      this.setState({playerData: res.data, length: length, team: team, name: full_name, pos: position, gotData: true });
     })
-}
-
-renderRacrChart(){
-	const { rec_yards, air_yards } = this.state.playerData
-	const racr = (this.state.playerData.racr).toFixed(2);
-	const colors = [
-		    '#00a2ce',
-		    '#4d430c',
-		    '#b3331d',
-		    '#b6a756'
-    	]
-		const data = [
-  			{ data: `${this.state.name} Recieving Yards`, yards: rec_yards },
-  			{ data: `${this.state.name} Air Yards`, yards: air_yards },
-			];
-	return (
-		 <ORFrame
-		 	title={`RACR (${racr})`}
-    	size={[300,300]}
-    	data={data}
-   		projection={"radial"}
-    	style={d => ({ fill: "#7c9b59", stroke: "darkgray", strokeWidth: 1 })}
-    	type={{ type: "bar", innerRadius: 50 }}
-    	// oLabel={true}
-    	dynamicColumnWidth={"yards"}
-    	oAccessor={"data"}
-    	margin={{ left: 60, top: 60, bottom: 60, right: 60 }}
-    	oPadding={3}
-    	hoverAnnotation={true}
-  />
-		)
-}
+	}
 
 renderMsChart(){
 	const { air_yards, tm_airyards } = this.state.playerData
 	const ms_air_yards = (this.state.playerData.ms_air_yards).toFixed(2);
-	const colors = [
-		    '#00a2ce',
-		    '#4d430c',
-		    '#b3331d',
-		    '#b6a756'
-    	]
 		const data = [
   			{ data: `${this.state.name} Air Yards`, air_yards: air_yards},
   			{ data: `${this.state.team} Air Yards`, air_yards: tm_airyards},
@@ -90,7 +57,7 @@ renderMsChart(){
 	console.log('ms_air_yards = ', this.state.playerData.ms_air_yards);
 	return (
 		 <ORFrame
-		 tooltipContent= {d => <p>{d.air_yards} yards</p>}
+		 	tooltipContent= {d => <p>{d.air_yards} yards</p>}
 		 	title={`Market Share Air Yards (${ms_air_yards})`}
     	size={[300,300]}
     	data={data}
@@ -102,7 +69,6 @@ renderMsChart(){
     	oAccessor={"data"}
     	margin={{ left: 60, top: 60, bottom: 60, right: 60 }}
     	oPadding={3}
-    	// hoverAnnotation={true}
     	pieceHoverAnnotation={true}
   />
 		)
@@ -111,18 +77,13 @@ renderMsChart(){
 renderTsChart(){
 	const { tar, tm_att } = this.state.playerData
 	const target_share = (this.state.playerData.target_share).toFixed(2);
-	const colors = [
-		    '#00a2ce',
-		    '#4d430c',
-		    '#b3331d',
-		    '#b6a756'
-    	]
 		const data = [
   			{ data: `${this.state.name} Targets`, targets: tar },
   			{ data: `${this.state.team} Targets`, targets: tm_att },
 			];
 	return (
 		 <ORFrame
+		 	tooltipContent= {d => <p>{d.targets} targets</p>}
 		 	// title={<g><circle r={5} /><text>Chart Title</text></g>}
 		 	title={`Target Share (${target_share})`}
     	size={[300,300]}
@@ -135,17 +96,42 @@ renderTsChart(){
     	oAccessor={"data"}
     	margin={{ left: 60, top: 60, bottom: 60, right: 60 }}
     	oPadding={3}
-    	hoverAnnotation={true}
+    	pieceHoverAnnotation={true}
   />
+		)
+}
+
+renderRacrChart(){
+	const { rec_yards, air_yards } = this.state.playerData
+	const racr = (this.state.playerData.racr).toFixed(2);
+	const data = [
+  			{ data: `${this.state.name} Recieving Yards`, yards: rec_yards },
+  			{ data: `${this.state.name} Air Yards`, yards: air_yards },
+			];
+	return (
+		 <ORFrame
+		 	tooltipContent= {d => <p>{d.yards} yards</p>}
+		 	title={`RACR (${racr})`}
+    	size={[300,300]}
+    	data={data}
+   		projection={"radial"}
+    	style={d => ({ fill: "#7c9b59", stroke: "darkgray", strokeWidth: 1 })}
+    	type={{ type: "bar", innerRadius: 50 }}
+    	oLabel={d => {d.data}}
+    	dynamicColumnWidth={"yards"}
+    	oAccessor={"data"}
+    	margin={{ left: 60, top: 60, bottom: 60, right: 60 }}
+    	oPadding={3}
+    	pieceHoverAnnotation={true}
+  	/>
 		)
 }
 
 render() {
 	return(
-		<div>
+		<div className="playerContainer">
 		<Header />
 		<Search />
-		<div className="playerContainer">
 		<div className="playerHeader">
 			<h1>{this.state.name} ‧ {this.state.pos} ‧ {this.state.team}</h1>
 		</div>
@@ -238,8 +224,7 @@ render() {
    					]}
         />
         </div>
-		</div>
-		</div>
+        </div>
 		)
 }
 }
