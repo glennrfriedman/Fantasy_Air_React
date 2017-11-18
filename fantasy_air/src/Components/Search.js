@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import { Link } from 'react-router-dom';
+
 class Search extends Component {
 
 constructor(props){
@@ -17,7 +19,7 @@ constructor(props){
     this.searchPlayers = this.searchPlayers.bind(this)
   }  
 
-handleChange(event) {
+  handleChange(event) {
     event.preventDefault();
     this.setState({
       value: event.target.value, searched: true
@@ -47,8 +49,9 @@ handleChange(event) {
     else {
       results.map(e => {
         renderSearch.push(    
-          <p>{e[0]} ‧ {e[2]} ‧ {e[1]}</p>
+          <Link key={e[0]} to={`/player/${e[0]}/${e[1]}`}><p>{e[0]} ‧ {e[2]} ‧ {e[1]}</p></Link>
           )
+        return renderSearch
       })
     return renderSearch
     }
@@ -57,24 +60,11 @@ handleChange(event) {
 render() {
   return(
     <div className="search-container">
-              <input className='searchBar' type='text' ref={el=>{this.search=el}} placeholder="Search Players" onChange={this.handleChange} />
-              <div className="searchResults"> {this.state.searched && this.displayPlayerResults()} </div>
+        <input className='searchBar' type='text' ref={el=>{this.search=el}} placeholder="Search Players" onChange={this.handleChange} />
+        <div className="searchResults"> {this.state.searched && this.displayPlayerResults()} </div>
     </div>
     )
   }
 }
 
 export default Search;
-  
-{/*<div className="container">
-          <Header />
-          <div className="data-container">
-            <div className="search-container">
-              <input className='searchBar' type='text' ref={el=>{this.search=el}} placeholder="Search Players" onChange={this.handleChange} />
-              <div className="searchResults"> {this.state.searched && this.displayPlayerResults()} </div>
-            </div>
-            <div className="weeklyData">
-              <Playertable url={this.state.url}/>
-            </div>
-            </div>
-  </div>*/}

@@ -7,7 +7,7 @@ render() {
 	return(
 		<div>
 		<Header />
-		<h1>Rendering About page</h1>
+			<h1>Rendering About page</h1>
 		</div>
 		)
 }

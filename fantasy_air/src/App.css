@@ -136,5 +136,49 @@ margin-bottom: 2%;
 	border: solid 1px #979797;
 }
 
+/*********************************** One Player Page **********************************/
+
+.playerContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-around;
+	flex: 1;
+}
+
+.playerHeader {
+	margin-top: -2%;
+	margin-left: 2%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex: 0.2;
+}
+
+.playerHeader h1 {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+/*.playerSubHead {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 35%;
+}*/
+
+
+.onePlayerTable {
+	position: absolute;
+	bottom: 30px;
+	margin-top: 4%;
+	flex: 0.2;
+	align-self: center;
+}
+
+
+
 
 

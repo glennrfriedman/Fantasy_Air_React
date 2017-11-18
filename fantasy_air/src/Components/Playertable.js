@@ -96,7 +96,7 @@ class Playertable extends Component {
 						<option defaultValue='all'>All</option>
 						 <option value='WR'>WR</option>
 						 <option value='TE'>TE</option>
-						 <option value='WR'>RB</option>
+						 <option value='RB'>RB</option>
 				</select>
 				</div>
 				<div className="viewSelect-item">
@@ -187,6 +187,7 @@ class Playertable extends Component {
           showPaginationTop={true}
 					className=" -highlight"
 					defaultPageSize={10}
+					defaultSortDesc={true}
         />
         </div>
       </div>
