@@ -3,13 +3,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
-// import {Bar} from 'react-chartjs-2';
 import { ORFrame } from 'semiotic';
 
 
 import Header from './Header.js';
 import Search from './Search.js';
-// import Chart from './Chart.js';
 
 class Player extends Component {
 

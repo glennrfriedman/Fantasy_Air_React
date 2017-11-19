@@ -11,30 +11,23 @@ class Team extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-	     team: 'ARI',
+			 week: 0,
 	     showWeek: '',
-	     playerData: [],
 	     weeks: [],
-	     week: 0,
-	     team: ''
+	     teamData: [],
+	     gotTeams: false
     }
-		this.getPlayerData = this.getPlayerData.bind(this);
-		this.getWeeks = this.getWeeks.bind(this);
-		this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.renderWeeks = this.renderWeeks.bind(this);
+			this.getTeamData = this.getTeamData.bind(this);
+			this.getWeeks = this.getWeeks.bind(this);
+			this.getTeams = this.getTeams.bind(this);
+			this.onChange = this.onChange.bind(this);
+    	this.onSubmit = this.onSubmit.bind(this);
+    	this.renderWeeks = this.renderWeeks.bind(this);
+    	// this.renderTeams = this.renderTeams.bind(this);
 	}
 
 	componentDidMount() {
 		this.getWeeks();
-		this.getTeams();
-	}
-
-	getTeams() {
-		axios.get(`${this.props.url}/teams`)
-		.then(res => {
-
-		})
 	}
 
 	getWeeks() {
@@ -43,8 +36,35 @@ class Team extends Component {
 			let current_week = Math.max(...res.data.weeks)
 			console.log('current_week is ', current_week)
 			this.setState({	week: current_week, weeks: res.data.weeks })
-			this.getPlayerData();
+			this.getTeams();
 		})
+	}
+
+	getTeams() {
+		axios.get(`${this.props.url}/teamlist/${this.state.week}`)
+		.then(res => {
+			console.log('teams are ', res.data)
+			this.setState({teams: res.data.teams, gotTeams: true })
+			this.getTeamData();
+		})
+	}
+
+	getTeamData() {
+		console.log('url is ', this.props.url)
+		const { teams, week } = this.state
+		const url = this.props.url
+		let teamCalls = [];
+		let teamData = [];
+		teams.forEach(function(team){
+			teamCalls.push(axios(`${url}/${team}/${week}`))
+		})
+		axios.all(teamCalls)
+		.then(res => {
+			res.forEach(function(res){
+				teamData.push(res.data)
+				})
+				this.setState({teamData: teamData, showWeek: this.state.week })
+			})
 	}
 
 	renderWeeks() {
@@ -58,15 +78,6 @@ class Team extends Component {
 		return renderOptions;
 	}
 
-	getTeamData() {
-		console.log(this.props.url)
-		axios.get(`${this.props.url}/weeks/${this.state.week}`)
-		.then(res => {
-			this.setState({playerData: res.data, showWeek: this.state.week})
-			}
-		)
-	}
-
 	onChange(e) {
 		this.setState({
       [e.target.name]: e.target.value
@@ -75,21 +86,7 @@ class Team extends Component {
 
 	onSubmit(event) {
 		event.preventDefault();
-		// /position/:position/:week
-		if (this.state.position === 'All') {
-			axios.get(`${this.props.url}/weeks/${this.state.week}`)
-				.then(res => {
-					console.log('res from submit weeks is ', res.data)
-					this.setState({playerData: res.data, showWeek: this.state.week});
-			})
-		}
-		else {
-			axios.get(`${this.props.url}/position/${this.state.position}/${this.state.week}`)
-				.then(res => {
-					console.log('res from submit weeks with position is ', res.data)
-					this.setState({playerData: res.data, showWeek: this.state.week});
-			})
-		}
+		this.getWeeks();
 	}
 
 	render() {
@@ -98,15 +95,6 @@ class Team extends Component {
 				<Header />
 				<div className="subHeader">
 				<form className='viewSelect' onSubmit={this.onSubmit}>
-				<div className="viewSelect-item">
-				<label htmlFor='positionSelect'>Position:</label>
-				<select className='select-values' id='positionSelect' name='position' value={this.state.position} onChange={this.onChange}>
-						<option defaultValue='all'>All</option>
-						 <option value='WR'>WR</option>
-						 <option value='TE'>TE</option>
-						 <option value='RB'>RB</option>
-				</select>
-				</div>
 				<div className="viewSelect-item">
 				<label htmlFor='weekSelect'>Week:</label>
 				<select className='select-values' id='weekSelect' name='week' value={this.state.week} onChange={this.onChange}>
@@ -122,23 +110,23 @@ class Team extends Component {
 
 				<div className='playerTable'>
         <ReactTable
-          data={this.state.playerData}
+          data={this.state.teamData}
           columns={[
             {
-              Header: `Air Yards Data for Week ${this.state.showWeek}`,
+              Header: `Team Air Yards Data for Week ${this.state.showWeek}`,
               columns: [
-                {
-                  Header: "Full Name",
-                  accessor: "full_name",
-                  width: 150
-                },
-                {
-                  Header: "Position",
-                  accessor: "position"
-                },
                 {
                   Header: "Team",
                   accessor: "team"
+                },
+                {
+                	Header: "Air Yards",
+                	accessor: "tm_airyards",
+									desc: true
+                },
+                {
+                	Header: "Rec. Yards",
+                	accessor: "rec_yards"
                 },
                 {
                 	Header: "Receptions",
@@ -149,45 +137,13 @@ class Team extends Component {
                 	accessor: "tar"
                 },
                 {
-                	Header: "Rec. Yards",
-                	accessor: "rec_yards"
-                },
-                {
                 	Header: "YAC",
                 	accessor: "yac"
                 },
                 {
-                	Header: "Air Yards",
-                	accessor: "air_yards"
-                },
-                {
-                	Header: "AYPT",
-                	accessor: "aypt"
-                },
-                {
-                	Header: "RACR",
-                	accessor: "racr"
-                },
-                {
-                	Header: "Team Attempts",
+                	Header: "Attempts",
                 	accessor: "tm_att"
-                },
-                {
-                	Header: "Target Share",
-                	accessor: "target_share"
-                },
-                {
-                	Header: "Team Air Yards",
-                	accessor: "tm_airyards"
-                },
-                {
-                	Header: "MS Air Yards",
-                	accessor: "ms_air_yards"
-                },
-                {
-                	Header: "WOPR",
-                	accessor: "wopr"
-                },
+                }
               ]
             }
           ]}
