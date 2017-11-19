@@ -50,7 +50,7 @@ constructor(props){
     else {
       results.map(e => {
         renderSearch.push(    
-          <Link key={e[0]} to={`/player/${e[0]}/${e[1]}`}><p>{e[0]} ‧ {e[2]} ‧ {e[1]}</p></Link>
+          <Link className="playerLink" key={e[0]} to={`/player/${e[0]}/${e[1]}`}><div>{e[0]} ‧ {e[2]} ‧ {e[1]}</div></Link>
           )
         return renderSearch
       })

@@ -49,8 +49,8 @@ renderMsChart(){
 	const { air_yards, tm_airyards } = this.state.playerData
 	const ms_air_yards = (this.state.playerData.ms_air_yards).toFixed(2);
 		const data = [
-  			{ data: `${this.state.name} Season Air Yards: ${air_yards}`, air_yards: air_yards},
-  			{ data: `${this.state.team} Season Air Yards: ${tm_airyards}`, air_yards: tm_airyards},
+  			{ "funnelKey":"#6F92BF", data: `${this.state.name} Season Air Yards: ${air_yards}`, air_yards: air_yards},
+  			{ "funnelKey":"#7c9b59", data: `${this.state.team} Season Air Yards: ${tm_airyards}`, air_yards: tm_airyards},
 			];
 	console.log('air_yards = ', this.state.playerData.air_yards);
 	console.log('tm_airyards = ', this.state.playerData.tm_airyards);
@@ -66,7 +66,7 @@ renderMsChart(){
     	size={[300,300]}
     	data={data}
    		projection={"radial"}
-    	style={d => ({ fill: "#7c9b59", stroke: "darkgray", strokeWidth: 1 })}
+      style={d => {return { fill: d.funnelKey, stroke: 'darkgray', strokeWidth: 1 }}}
     	type={{ type: "bar", innerRadius: 50 }}
     	// oLabel={true}
     	dynamicColumnWidth={"air_yards"}
@@ -82,8 +82,8 @@ renderTsChart(){
 	const { tar, tm_att } = this.state.playerData
 	const target_share = (this.state.playerData.target_share).toFixed(2);
 		const data = [
-  			{ data: `${this.state.name} Sesaon Targets: ${tar}`, targets: tar },
-  			{ data: `${this.state.team} Season Attempts: ${tm_att}`, targets: tm_att },
+  			{ "funnelKey":"#6F92BF", data: `${this.state.name} Sesaon Targets: ${tar}`, targets: tar },
+  			{ "funnelKey":"#7c9b59", data: `${this.state.team} Season Attempts: ${tm_att}`, targets: tm_att },
 			];
 	return (
 		 <ORFrame
@@ -97,7 +97,7 @@ renderTsChart(){
     	size={[300,300]}
     	data={data}
    		projection={"radial"}
-    	style={d => ({ fill: "#7c9b59", stroke: "darkgray", strokeWidth: 1 })}
+    	style={d => {return { fill: d.funnelKey, stroke: 'darkgray', strokeWidth: 1 }}}
     	type={{ type: "bar", innerRadius: 50 }}
     	// oLabel={true}
     	dynamicColumnWidth={"targets"}
@@ -119,8 +119,8 @@ renderRacrChart(){
 	const { rec_yards, air_yards } = this.state.playerData
 	const racr = (this.state.playerData.racr).toFixed(2);
 	const data = [
-  			{ data: `${this.state.name} Season Recieving Yards: ${rec_yards}`, yards: rec_yards },
-  			{ data: `${this.state.name} Season Air Yards: ${air_yards}`, yards: air_yards },
+  			{ "funnelKey":"#6F92BF", data: `${this.state.name} Season Recieving Yards: ${rec_yards}`, yards: rec_yards },
+  			{ "funnelKey":"#7c9b59", data: `${this.state.name} Season Air Yards: ${air_yards}`, yards: air_yards },
 			];
 	return (
 		 <ORFrame
@@ -133,7 +133,7 @@ renderRacrChart(){
     	size={[300,300]}
     	data={data}
    		projection={"radial"}
-    	style={d => ({ fill: "#7c9b59", stroke: "darkgray", strokeWidth: 1 })}
+    	style={d => {return { fill: d.funnelKey, stroke: 'darkgray', strokeWidth: 1 }}}
     	type={{ type: "bar", innerRadius: 50 }}
     	oLabel={d => {d.data}}
     	dynamicColumnWidth={"yards"}

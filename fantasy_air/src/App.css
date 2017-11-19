@@ -50,6 +50,10 @@ margin-bottom: 2%;
 	margin-top: 2%;
 }
 
+.logo-right img {
+	width: 36px;
+}
+
 .header-links {
 	flex: .7;
 	display: flex;
@@ -86,6 +90,16 @@ margin-bottom: 2%;
 	border-radius: 5px;
 	position: fixed;
 	z-index: 4;
+}
+
+.playerLink div {
+	height: 15%;
+	padding: 2%;
+	border-radius: 5px;
+}
+
+.playerLink div:hover {
+	background-color: #7c9b59;
 }
 
 /*********************************** Player Table Main **********************************/

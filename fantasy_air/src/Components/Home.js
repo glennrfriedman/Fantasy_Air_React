@@ -25,7 +25,7 @@ class Home extends Component {
     return(
       <Switch>
         <Route exact path="/" render={props => (<Playertable url={this.state.url}/>)}/>
-        <Route path="/teams" render={props => (<Team/>)}/>
+        <Route path="/teams" render={props => (<Team url={this.state.url} />)}/>
         <Route path="/compare" render={props => (<Compare/>)}/>
         <Route path="/player/:full_name/:team" render={props => (<Player routeProps={props}/>)}/>
         <Route path="/about" render={props => (<About/>)}/>

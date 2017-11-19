@@ -11,11 +11,12 @@ class Team extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-	     position: 'All',
+	     team: 'ARI',
 	     showWeek: '',
 	     playerData: [],
 	     weeks: [],
-	     week: 0
+	     week: 0,
+	     team: ''
     }
 		this.getPlayerData = this.getPlayerData.bind(this);
 		this.getWeeks = this.getWeeks.bind(this);
@@ -26,12 +27,19 @@ class Team extends Component {
 
 	componentDidMount() {
 		this.getWeeks();
+		this.getTeams();
+	}
+
+	getTeams() {
+		axios.get(`${this.props.url}/teams`)
+		.then(res => {
+
+		})
 	}
 
 	getWeeks() {
 		axios.get(`${this.props.url}/showWeek`)
 		.then(res => {
-			// console.log('weeks are', res.data.weeks)
 			let current_week = Math.max(...res.data.weeks)
 			console.log('current_week is ', current_week)
 			this.setState({	week: current_week, weeks: res.data.weeks })
