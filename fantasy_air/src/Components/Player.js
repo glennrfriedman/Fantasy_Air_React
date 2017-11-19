@@ -108,12 +108,6 @@ renderTsChart(){
 }
 
 renderRacrChart(){
-	const colors = [
-    '#00a2ce',
-    '#4d430c',
-    '#b3331d',
-    '#b6a756'
-	]
 	const { rec_yards, air_yards } = this.state.playerData
 	const racr = (this.state.playerData.racr).toFixed(2);
 	const data = [

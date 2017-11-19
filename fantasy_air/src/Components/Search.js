@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import SearchIcon from '../Assets/Search.png';
+// import SearchIcon from '../Assets/Search.png';
 import { Link } from 'react-router-dom';
 
 class Search extends Component {

@@ -23,7 +23,6 @@ class Team extends Component {
 			this.onChange = this.onChange.bind(this);
     	this.onSubmit = this.onSubmit.bind(this);
     	this.renderWeeks = this.renderWeeks.bind(this);
-    	// this.renderTeams = this.renderTeams.bind(this);
 	}
 
 	componentDidMount() {
@@ -80,13 +79,14 @@ class Team extends Component {
 
 	onChange(e) {
 		this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value, teams: []
 		})
 	}
 
 	onSubmit(event) {
 		event.preventDefault();
-		this.getWeeks();
+		this.getTeams();
+		this.getTeamData();
 	}
 
 	render() {
@@ -152,6 +152,11 @@ class Team extends Component {
 					className=" -highlight"
 					defaultPageSize={10}
 					defaultSortDesc={true}
+					sorted={[{
+      				id: 'tm_airyards',
+      				desc: true
+   						 }
+   					]}
         />
         </div>
       </div>
