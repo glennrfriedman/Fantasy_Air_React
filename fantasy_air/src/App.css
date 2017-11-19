@@ -102,7 +102,7 @@ margin-bottom: 2%;
 	background-color: #7c9b59;
 }
 
-/*********************************** Player Table Main **********************************/
+/*********************************** Player Table Main/Team Data **********************************/
 
 .subHeader {
 	width: 85vw;
@@ -239,6 +239,63 @@ margin-bottom: 2%;
   z-index: 99;
  }
 
+ /*********************************** Compare Players **********************************/
+.compareContainer {
+	height: 100vh;
+	width: 100vw;
+}
 
+.comparePlayersContainer {
+	display: flex;
+	flex-direction: row;
+	height: 70vh;
+	margin: 2%;
+}
 
+.selectPlayersContainer {
+	/*border: 1px solid black;*/
+	flex: 0.3;
+	display: flex;
+	flex-direction: column;
+}
+
+.selectedPlayers {
+	/*border: 1px solid orange;*/
+	height: 70%;
+	margin-bottom: 5%;
+}
+
+.compareChartContainer {
+	border: 1px solid green;
+	flex: 1;
+}
+
+.search-player-container {
+	margin-left: 2%;
+}
+
+.selectedPlayer {
+	background-color: lightgrey;
+	margin-right: 2%;
+	margin-left: 2%;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.selectedPlayersHead {
+	margin-top: 2%;
+	text-align: center;
+	font-weight: bold;
+}
+
+.compareButton {
+	align-self: center;
+	margin: 0px 10px;
+	width: 120px;
+	height: 30px;
+	border-radius: 6px;
+	background-image: linear-gradient(to bottom, #d8d8d8, #b3b3b3);
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), inset 0 2px 0 0 #ffffff;
+	border: solid 1px #979797;
+}
 

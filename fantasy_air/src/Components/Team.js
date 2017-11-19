@@ -57,6 +57,7 @@ class Team extends Component {
 		teams.forEach(function(team){
 			teamCalls.push(axios(`${url}/${team}/${week}`))
 		})
+		console.log('team Calls are ', teamCalls)
 		axios.all(teamCalls)
 		.then(res => {
 			res.forEach(function(res){
