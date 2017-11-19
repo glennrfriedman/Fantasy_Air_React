@@ -49,16 +49,20 @@ renderMsChart(){
 	const { air_yards, tm_airyards } = this.state.playerData
 	const ms_air_yards = (this.state.playerData.ms_air_yards).toFixed(2);
 		const data = [
-  			{ data: `${this.state.name} Air Yards`, air_yards: air_yards},
-  			{ data: `${this.state.team} Air Yards`, air_yards: tm_airyards},
+  			{ data: `${this.state.name} Season Air Yards: ${air_yards}`, air_yards: air_yards},
+  			{ data: `${this.state.team} Season Air Yards: ${tm_airyards}`, air_yards: tm_airyards},
 			];
 	console.log('air_yards = ', this.state.playerData.air_yards);
 	console.log('tm_airyards = ', this.state.playerData.tm_airyards);
 	console.log('ms_air_yards = ', this.state.playerData.ms_air_yards);
 	return (
 		 <ORFrame
-		 	tooltipContent= {d => <p>{d.air_yards} yards</p>}
-		 	title={`Market Share Air Yards (${ms_air_yards})`}
+		 	t	tooltipContent= {d => 
+		 		<div className="tooltip-content">
+		 			<p>{d.data}</p>
+		 		</div>
+		 	}
+		 	title={`Season Market Share Air Yards (${ms_air_yards})`}
     	size={[300,300]}
     	data={data}
    		projection={"radial"}
@@ -78,14 +82,18 @@ renderTsChart(){
 	const { tar, tm_att } = this.state.playerData
 	const target_share = (this.state.playerData.target_share).toFixed(2);
 		const data = [
-  			{ data: `${this.state.name} Targets`, targets: tar },
-  			{ data: `${this.state.team} Targets`, targets: tm_att },
+  			{ data: `${this.state.name} Sesaon Targets: ${tar}`, targets: tar },
+  			{ data: `${this.state.team} Season Attempts: ${tm_att}`, targets: tm_att },
 			];
 	return (
 		 <ORFrame
-		 	tooltipContent= {d => <p>{d.targets} targets</p>}
+		 		tooltipContent= {d => 
+		 		<div className="tooltip-content">
+		 			<p>{d.data}</p>
+		 		</div>
+		 	}
 		 	// title={<g><circle r={5} /><text>Chart Title</text></g>}
-		 	title={`Target Share (${target_share})`}
+		 	title={`Season Target Share (${target_share})`}
     	size={[300,300]}
     	data={data}
    		projection={"radial"}
@@ -102,16 +110,26 @@ renderTsChart(){
 }
 
 renderRacrChart(){
+	const colors = [
+    '#00a2ce',
+    '#4d430c',
+    '#b3331d',
+    '#b6a756'
+	]
 	const { rec_yards, air_yards } = this.state.playerData
 	const racr = (this.state.playerData.racr).toFixed(2);
 	const data = [
-  			{ data: `${this.state.name} Recieving Yards`, yards: rec_yards },
-  			{ data: `${this.state.name} Air Yards`, yards: air_yards },
+  			{ data: `${this.state.name} Season Recieving Yards: ${rec_yards}`, yards: rec_yards },
+  			{ data: `${this.state.name} Season Air Yards: ${air_yards}`, yards: air_yards },
 			];
 	return (
 		 <ORFrame
-		 	tooltipContent= {d => <p>{d.yards} yards</p>}
-		 	title={`RACR (${racr})`}
+		 	tooltipContent= {d => 
+		 		<div className="tooltip-content">
+		 			<p>{d.data}</p>
+		 		</div>
+		 	}
+		 	title={`Season RACR (${racr})`}
     	size={[300,300]}
     	data={data}
    		projection={"radial"}
@@ -122,6 +140,7 @@ renderRacrChart(){
     	oAccessor={"data"}
     	margin={{ left: 60, top: 60, bottom: 60, right: 60 }}
     	oPadding={3}
+    	// hoverAnnotation={true}
     	pieceHoverAnnotation={true}
   	/>
 		)

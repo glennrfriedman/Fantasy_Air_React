@@ -36,7 +36,18 @@ margin-bottom: 2%;
 
 .logo {
 	flex: 1;
+	display: flex;
+	align-items: center;
 	margin-left: 2%;
+}
+
+.logo-left h1 {
+	margin-bottom: 0;
+}
+
+.logo-right {
+	margin-left: 2%;
+	margin-top: 2%;
 }
 
 .header-links {
@@ -53,14 +64,22 @@ margin-bottom: 2%;
 	height: 36px;
 }
 
+/*.searchIcon {
+	position: absolute;
+	left: 10px;
+}*/
+
 .search-container {
 	width: 100vw;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
+	position: relative;
 }
 
 .searchResults {
+	margin-top: 3%;
+	margin-right: 3%;
 	text-align: center;
 	width: 270px;
 	background: grey;
@@ -161,22 +180,21 @@ margin-bottom: 2%;
 	border: 0;
 }
 
-/*.playerSubHead {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	width: 35%;
-}*/
-
 .onePlayerTable {
-	position: absolute;
-	bottom: 30px;
-	margin-top: 4%;
 	flex: 0.2;
 	align-self: center;
 	width: 80vw;
 }
+
+.playerContainer .searchBar {
+	margin-right: 3%;
+}
+
+/*.playerContainer .searchResults {
+	margin-right: 3%;
+}
+*/
+/*********************************** One Player Graph **********************************/
 
 .playerGraphContainer {
 	margin-top: 1%;
@@ -187,13 +205,25 @@ margin-bottom: 2%;
 	width: 75vw;
 }
 
-.graph {
+ .tooltip-content {
+  background: white;
+  border: 1px solid black;
+  color: black;
+  padding: 10px;
+  z-index: 99;
+  min-width: 120px;
+ }
 
-}
-
-.playerContainer .searchBar {
-	margin-right: 2%;
-}
+ .tooltip-content:before {
+  background: white;
+  content: '';
+  padding: 0px;
+  transform: rotate(45deg);
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  z-index: 99;
+ }
 
 
 

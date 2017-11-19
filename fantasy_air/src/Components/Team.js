@@ -50,7 +50,7 @@ class Team extends Component {
 		return renderOptions;
 	}
 
-	getPlayerData() {
+	getTeamData() {
 		console.log(this.props.url)
 		axios.get(`${this.props.url}/weeks/${this.state.week}`)
 		.then(res => {

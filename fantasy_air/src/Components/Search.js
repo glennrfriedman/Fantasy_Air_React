@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import SearchIcon from '../Assets/Search.png';
 import { Link } from 'react-router-dom';
 
 class Search extends Component {
@@ -60,7 +61,7 @@ constructor(props){
 render() {
   return(
     <div className="search-container">
-        <input className='searchBar' type='text' ref={el=>{this.search=el}} placeholder="Search Players" onChange={this.handleChange} />
+        <input className='searchBar' type='text' ref={el=>{this.search=el}} placeholder="   Search Players (Click to Select)" onChange={this.handleChange} />
         <div className="searchResults"> {this.state.searched && this.displayPlayerResults()} </div>
     </div>
     )
