@@ -314,41 +314,57 @@ margin-bottom: 2%;
 	margin: 2%;
 }
 
-.selectPlayersContainer {
-	/*border: 1px solid black;*/
-	flex: 0.4;
-	display: flex;
-	flex-direction: column;
+.statDesc {
+	flex: 0.2;
 }
 
+.compareContainer .search-container {
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+}
+
+.addLabel {
+	font-size: 24px;
+}
+
+.compareResults {
+	text-align: center;
+	width: 270px;
+	background: grey;
+	border-radius: 5px;
+	z-index: 4;
+	color: white;
+	position: absolute;
+	margin-top: 72px;
+	border: 0;
+	padding: 0;
+}
+
+.selectPlayersContainer {
+	flex: 0.3;
+	display: flex;
+	flex-direction: column;
+	margin-left: 4%;
+}
+
+.selectPlayersContainer .select-values {
+    width: 100px;
+ }
+
 .selectedPlayers {
-	/*border: 1px solid orange;*/
 	height: 50%;
 	margin-bottom: 5%;
 }
 
 .compareChartContainer {
-/*	border-left: 1px solid black;
-	border-bottom: 1px solid black;*/
 	margin-bottom: 10%;
 	display: flex;
 	justify-content: flex-start;
-	margin-left: 15%;
-	flex: 0.5;
-}
-
-.compareContainer .searchBar {
-	margin-right: 2%;
-}
-
-.compareContainer .searchResults {
-	margin-right: 2%;
-	z-index: 4;
-}
-
-.search-player-container {
 	margin-left: 2%;
+	flex: 0.7;
 }
+
 
 .selectedPlayer {
 	background-color: lightgrey;
@@ -356,6 +372,7 @@ margin-bottom: 2%;
 	margin-left: 2%;
 	border-radius: 5px;
 	text-align: center;
+	padding: 1%;
 }
 
 .selectedPlayersHead {
@@ -385,3 +402,12 @@ margin-bottom: 2%;
 	align-self: center;
 	font-size: 36px;
 }
+
+/*********************************** About Players **********************************/
+
+.aboutContainer {
+	width: 100vw;
+	height: 100vh;
+}
+
+

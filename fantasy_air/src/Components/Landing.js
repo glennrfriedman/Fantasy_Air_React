@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../Assets/departure.png';
 
-import Header from './Header.js';
+// import Header from './Header.js';
 
 class Landing extends Component {
 render() {
@@ -24,11 +24,11 @@ render() {
 				</div>
 				<div className="landingSection">
 					<Link to="/compare"><div>Compare Players</div></Link>
-					<p><em>Compare players season-long air yards statistics</em></p>
+					<p><em>Compare season-long air yards statistics by player</em></p>
 				</div>
 				<div className="landingSection">
 					<Link to="/about"><div>About Air Yards</div></Link>
-					<p><em>Air yards? Click here</em></p>
+					<p><em>Asking yourself, "What are Air yards?"</em></p>
 				</div>
 			</div>
 		</div>

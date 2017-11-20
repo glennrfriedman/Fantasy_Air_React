@@ -25,7 +25,7 @@ class Home extends Component {
   renderView(){
     return(
       <Switch>
-        <Route exact path="/" render={props => (<Landing url={this.state.url}/>)}/>
+        <Route exact path="/" render={props => (<Landing />)}/>
         <Route path="/players" render={props => (<Playertable url={this.state.url}/>)}/>
         <Route path="/teams" render={props => (<Team url={this.state.url} />)}/>
         <Route path="/compare" render={props => (<Compare url={this.state.url}/>)}/>

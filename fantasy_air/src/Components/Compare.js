@@ -15,7 +15,7 @@ constructor(props){
     searched: false,
     compare: false,
     comparePlayers: [],
-    compareTerm: 'air_yards1',
+    compareTerm: 'air_yards',
     limit: false
 	}
 	this.handleChange = this.handleChange.bind(this);
@@ -151,7 +151,7 @@ handleChange(event) {
   		let compareData = this.state.compareData
   		compareData.forEach(function(compareDatum) {
           let colorHash = ['#7c9b59', '#6F92BF']
-  				if (compareTerm === 'air_yards1') {
+  				if (compareTerm === 'air_yards') {
   					let stepValue = compareDatum.air_yards
             data.push({
                     funnelKey: "#7c9b59",
@@ -168,7 +168,7 @@ handleChange(event) {
                  })
   				}
   				else if (compareTerm === 'ms_air_yards') { 
-  					let stepValue = compareDatum.ms_air_yards
+  					let stepValue = compareDatum.ms_air_yards.toFixed(2)
   					data.push({
   									funnelKey: "#7c9b59",
                     player: compareDatum.player_data[0].full_name, 
@@ -176,7 +176,7 @@ handleChange(event) {
                  })
   				}
   				else if (compareTerm === 'aypt') { 
-  					let stepValue = compareDatum.aypt
+  					let stepValue = compareDatum.aypt.toFixed(2)
   					data.push({
   									funnelKey: "#7c9b59",
                     player: compareDatum.player_data[0].full_name, 
@@ -184,7 +184,7 @@ handleChange(event) {
                  })
   				}
   				else if (compareTerm === 'racr') { 
-  					let stepValue = compareDatum.racr
+  					let stepValue = compareDatum.racr.toFixed(2)
   					data.push({
   									funnelKey: "#7c9b59",
                     player: compareDatum.player_data[0].full_name, 
@@ -192,7 +192,7 @@ handleChange(event) {
                  })
   				}
   				else if (compareTerm === 'target_share') { 
-  					let stepValue = compareDatum.target_share
+  					let stepValue = compareDatum.target_share.toFixed(2)
   					data.push({
   									funnelKey: "#7c9b59",
                     player: compareDatum.player_data[0].full_name, 
@@ -210,20 +210,21 @@ handleChange(event) {
 				return (
 					<ORFrame
 						title={`Season Comparison`}
-            size={[600, 600]}
+            size={[800, 500]}
             data={data}
             oAccessor={"player"}
             rAccessor={"air_yards"}
             style={d => {return { fill: d.funnelKey, stroke: 'darkgray', strokeWidth: 1 }}}
             type={"bar"}
-            // oLabel={true}
+            oLabel={true}
+            projection={'horizontal'}
             pieceHoverAnnotation={true}
-            oLabel={d => (
-              <text transform="translate(-15,0)rotate(45)">{d}</text>
-            )}
+            // oLabel={d => (
+            //   <text transform="translate(-30,0)rotate(0)">{d}</text>
+            // )}
             axis={ {margin: 10, orient: "left", label: `${compareTerm}` } } 
-            margin={{ left: 60, top: 60, bottom: 60, right: 100 }}
-            oPadding={15}
+            margin={{ left: 160, top: 60, bottom: 60, right: 60 }}
+            oPadding={30}
           /> 
 			    )
   }
@@ -234,21 +235,21 @@ render() {
 		<div className="compareContainer">
 		<Header />
 		 <div className="search-container">
+        <div className="addLabel">Add Players:</div>
         <input className='searchBar' type='text' ref={el=>{this.search=el}} placeholder="  Search Players to Compare (Click to Select)" onChange={this.handleChange} />
-        <div className="searchResults"> {this.state.searched && this.displayPlayerResults()} </div>
+        <div className="compareResults"> {this.state.searched && this.displayPlayerResults()} </div>
     </div>
 		<div className="comparePlayersContainer">
 			
 			<div className="selectPlayersContainer"> 
 				<div className="selectedPlayers"> 
-          {this.state.limit && this.showLimitMessage()}
 					<div className="selectedPlayersHead">Selected Players (Up to 5)</div>
 						{this.renderSelectedPlayers()}
 				</div>
 				<div className="statSelect">
-				<label htmlFor='statSelect'>Compare On:</label><br></br>
+				<div>Compare On:</div>
 				<select className='select-values' id='statSelector' name='compareTerm' value={this.state.compareTerm} onChange={this.onChange}>
-						<option defaultValue='air_yards'>Air Yards</option>
+						 <option value='air_yards'>Air Yards</option>
 						 <option value='aypt'>AYPT</option>
 						 <option value='racr'>RACR</option>
 						 <option value='ms_air_yards'>MS Air Yards</option>
@@ -257,16 +258,27 @@ render() {
 				</div>
 				<button onClick={this.getSeasonStats} className="compareButton"> Compare Players </button><br></br>
 				<button onClick={this.reset} className="compareButton"> Reset </button>
-			</div>
+			 </div>
 			
 			<div className="compareChartContainer"> 
 				{this.state.compare && 
-					this.renderCompareChart()}
-				{
-					this.state.compare !== true && 
-					<div className="placeholderText">No players selected</div>
-				}
+					this.renderCompareChart()}  
+				{this.state.compare !== true && 
+					<div className="placeholderText">No players selected</div>}
 			</div>
+
+      <div className="statDesc">
+       {this.state.compare && this.state.compareTerm === 'air_yards' &&
+          <div>Air yards measure receivers volumne or opportunity. Think of it this way, the higher the volume, the more likely a player is to turn that volume into fantasy points.</div>}
+        {this.state.compare && this.state.compareTerm === 'aypt' &&
+          <div>Air yards per target is an average measure of how deep down field a receiver is targeted. For example, if a player has an AYPT of 21 that means he is a deep threat, and sees a lot of opportunity to make big plays.</div>}
+        {this.state.compare && this.state.compareTerm === 'racr' &&
+          <div>RACR is Receiver Air Conversion Ratio. RACR is an efficiency stat that answers the question: “How well does a player convert a yard thrown at him into receiving yards?” The formula for RACR is: Receiving Yards / Total Air Yards. For example, a RB might have a very high RACR (>1) because their AYPT is low where a deep threat might have a lower RACR since their YAC may be lower.</div>}
+        {this.state.compare && this.state.compareTerm === 'ms_air_yards' &&
+          <div>Market Share Air Yards measure the amount of team Air Yards a player receives. The higher this percentage the more this player is targeted down field.</div>}
+        {this.state.compare && this.state.compareTerm === 'target_share' &&
+          <div>Target Share measures the amount of team targets a player receives. More targets means more opportunity which usually means more fantasy points.</div>}
+      </div>
 
 		</div>
 		
