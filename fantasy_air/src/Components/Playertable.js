@@ -33,7 +33,7 @@ class Playertable extends Component {
 		.then(res => {
 			// console.log('weeks are', res.data.weeks)
 			let current_week = Math.max(...res.data.weeks)
-			console.log('current_week is ', current_week)
+			// console.log('current_week is ', current_week)
 			this.setState({	week: current_week, weeks: res.data.weeks })
 			this.getPlayerData();
 		})
@@ -51,7 +51,7 @@ class Playertable extends Component {
 	}
 
 	getPlayerData() {
-		console.log(this.props.url)
+		// console.log(this.props.url)
 		axios.get(`${this.props.url}/weeks/${this.state.week}`)
 		.then(res => {
 			this.setState({playerData: res.data, showWeek: this.state.week})
@@ -71,14 +71,14 @@ class Playertable extends Component {
 		if (this.state.position === 'All') {
 			axios.get(`${this.props.url}/weeks/${this.state.week}`)
 				.then(res => {
-					console.log('res from submit weeks is ', res.data)
+					// console.log('res from submit weeks is ', res.data)
 					this.setState({playerData: res.data, showWeek: this.state.week});
 			})
 		}
 		else {
 			axios.get(`${this.props.url}/position/${this.state.position}/${this.state.week}`)
 				.then(res => {
-					console.log('res from submit weeks with position is ', res.data)
+					// console.log('res from submit weeks with position is ', res.data)
 					this.setState({playerData: res.data, showWeek: this.state.week});
 			})
 		}

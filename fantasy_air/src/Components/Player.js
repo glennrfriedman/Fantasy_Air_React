@@ -23,19 +23,19 @@ constructor(props){
 	this.renderTsChart = this.renderTsChart.bind(this);
 	this.renderRacrChart = this.renderRacrChart.bind(this);
   this.clearPlayer = this.clearPlayer.bind(this);
-	console.log('props from cons', props);
+	// console.log('props from cons', props);
+}
+
+componentWillReceiveProps(nextProps){
+  this.getPlayerData(nextProps);
 }
 
 componentDidMount(){
-	this.getPlayerData();
+	this.getPlayerData(this.props);
 }
 
-componentWillUnMount(){
-	this.getPlayerData();
-}
-
-getPlayerData(){
-	const { full_name, team } = this.props.routeProps.match.params
+getPlayerData(player){
+	const { full_name, team } = player.routeProps.match.params
 	axios.get(`${this.state.url}/players/${full_name}/${team}`)
     .then(res => {
     	const length = res.data.player_data.length;
@@ -51,9 +51,9 @@ renderMsChart(){
   			{ "funnelKey":"#6F92BF", data: `${this.state.name} Season Air Yards: ${air_yards}`, air_yards: air_yards},
   			{ "funnelKey":"#7c9b59", data: `${this.state.team} Season Air Yards: ${tm_airyards}`, air_yards: tm_airyards},
 			];
-	console.log('air_yards = ', this.state.playerData.air_yards);
-	console.log('tm_airyards = ', this.state.playerData.tm_airyards);
-	console.log('ms_air_yards = ', this.state.playerData.ms_air_yards);
+	// console.log('air_yards = ', this.state.playerData.air_yards);
+	// console.log('tm_airyards = ', this.state.playerData.tm_airyards);
+	// console.log('ms_air_yards = ', this.state.playerData.ms_air_yards);
 	return (
 		 <ORFrame
 		 	t	tooltipContent= {d => 

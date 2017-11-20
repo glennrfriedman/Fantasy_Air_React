@@ -15,20 +15,20 @@ render() {
 			</div>
 			<div className="landingLinks">
 				<div className="landingSection">
-						<Link to="/players"><div>Player Data</div></Link>
-						<p><em>See weekly air yards stats on every player in the NFL</em></p>
+						<Link to="/players"><div>Players</div></Link>
+						<p><em>See weekly Air Yards stats for every pass catcher in the NFL</em></p>
 				</div>
 				<div className="landingSection">
-					<Link to="/teams"><div>Team Data</div></Link>
-					<p><em>See weekly air yards stats for every team in the NFL</em></p>
+					<Link to="/teams"><div>Teams</div></Link>
+					<p><em>See weekly Air Yards stats for every team in the NFL</em></p>
 				</div>
 				<div className="landingSection">
-					<Link to="/compare"><div>Compare Players</div></Link>
-					<p><em>Compare season-long air yards statistics by player</em></p>
+					<Link to="/compare"><div>Compare</div></Link>
+					<p><em>Compare season-long Air Yards stats by player</em></p>
 				</div>
 				<div className="landingSection">
-					<Link to="/about"><div>About Air Yards</div></Link>
-					<p><em>Asking yourself, "What are Air yards?"</em></p>
+					<Link to="/about"><div>About</div></Link>
+					<p><em>Air Yards explained</em></p>
 				</div>
 			</div>
 		</div>

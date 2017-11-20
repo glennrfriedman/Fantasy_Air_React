@@ -73,7 +73,7 @@ handleChange(event) {
 
   onClickPlayer(e){
   	e.preventDefault();
-    console.log(this.state.players)
+    // console.log(this.state.players)
   	if (this.state.players.length < 5) {
   		this.state.players.push({name: e.target.getAttribute("name"), team: e.target.getAttribute("team"), pos: e.target.getAttribute("pos")})
   		this.setState({value: "", searchResults: [], searched: false})
@@ -121,7 +121,7 @@ handleChange(event) {
 			res.forEach(function(res){
 				playerData.push(res.data)
 				})
-				console.log('playerData outside of axios.all is ', playerData)
+				// console.log('playerData outside of axios.all is ', playerData)
 				this.setState({ compareData: playerData, compare: true })
 			})
   }
@@ -149,6 +149,7 @@ handleChange(event) {
   		const data = []; 
   		let compareTerm = this.state.compareTerm
   		let compareData = this.state.compareData
+      // console.log('compare data is ', compareData)
   		compareData.forEach(function(compareDatum) {
           let colorHash = ['#7c9b59', '#6F92BF']
   				if (compareTerm === 'air_yards') {
@@ -199,13 +200,21 @@ handleChange(event) {
                     air_yards: stepValue
                  })
   				}
+          else if (compareTerm === 'wopr') { 
+            let stepValue = compareDatum.wopr.toFixed(2)
+            data.push({
+                    funnelKey: "#7c9b59",
+                    player: compareDatum.player_data[0].full_name, 
+                    air_yards: stepValue
+                 })
+          }
   			// console.log('compareTerm inside forEach is ', compareTerm)
   			// console.log('compareDatum is ', compareDatum)
   			// const stepValue = compareDatum[compareTerm]
   			// console.log('compare term value is ', compareDatum.compareTerm)
   		})
 
-  		console.log('compare data in renderCompareChart is ', data)
+  		// console.log('compare data in renderCompareChart is ', data)
 
 				return (
 					<ORFrame
@@ -254,6 +263,7 @@ render() {
 						 <option value='racr'>RACR</option>
 						 <option value='ms_air_yards'>MS Air Yards</option>
 						 <option value='target_share'>Target Share</option>
+             <option value='wopr'>WOPR</option>
 				</select>
 				</div>
 				<button onClick={this.getSeasonStats} className="compareButton"> Compare Players </button><br></br>
@@ -264,7 +274,7 @@ render() {
 				{this.state.compare && 
 					this.renderCompareChart()}  
 				{this.state.compare !== true && 
-					<div className="placeholderText">No players selected</div>}
+					<div className="placeholderText">Search and add players to compare</div>}
 			</div>
 
       <div className="statDesc">
@@ -275,9 +285,11 @@ render() {
         {this.state.compare && this.state.compareTerm === 'racr' &&
           <div>RACR is Receiver Air Conversion Ratio. RACR is an efficiency stat that answers the question: “How well does a player convert a yard thrown at him into receiving yards?” The formula for RACR is: Receiving Yards / Total Air Yards. For example, a RB might have a very high RACR (>1) because their AYPT is low where a deep threat might have a lower RACR since their YAC may be lower.</div>}
         {this.state.compare && this.state.compareTerm === 'ms_air_yards' &&
-          <div>Market Share Air Yards measure the amount of team Air Yards a player receives. The higher this percentage the more this player is targeted down field.</div>}
+          <div>Market Share Air Yards measure the amount of team Air Yards a player receives. The higher this percentage the more this player is targeted down field compared to other players on the same team.</div>}
         {this.state.compare && this.state.compareTerm === 'target_share' &&
           <div>Target Share measures the amount of team targets a player receives. More targets means more opportunity which usually means more fantasy points.</div>}
+        {this.state.compare && this.state.compareTerm === 'wopr' &&
+          <div>WOPR allows us to compare slot receivers who get lots of targets but not a lot of air yards with players who receive fewer targets but a greater share of the team’s air yards. WOPR takes share of team air yards and share of team targets and weights them based on how well they predict both PPR and standard fantasy points.</div>}
       </div>
 
 		</div>

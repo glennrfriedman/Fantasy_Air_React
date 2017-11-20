@@ -33,7 +33,7 @@ class Team extends Component {
 		axios.get(`${this.props.url}/showWeek`)
 		.then(res => {
 			let current_week = Math.max(...res.data.weeks)
-			console.log('current_week is ', current_week)
+			// console.log('current_week is ', current_week)
 			this.setState({	week: current_week, weeks: res.data.weeks })
 			this.getTeams();
 		})
@@ -42,14 +42,14 @@ class Team extends Component {
 	getTeams() {
 		axios.get(`${this.props.url}/teamlist/${this.state.week}`)
 		.then(res => {
-			console.log('teams are ', res.data)
+			// console.log('teams are ', res.data)
 			this.setState({teams: res.data.teams, gotTeams: true })
 			this.getTeamData();
 		})
 	}
 
 	getTeamData() {
-		console.log('url is ', this.props.url)
+		// console.log('url is ', this.props.url)
 		const { teams, week } = this.state
 		const url = this.props.url
 		let teamCalls = [];
@@ -57,7 +57,7 @@ class Team extends Component {
 		teams.forEach(function(team){
 			teamCalls.push(axios(`${url}/${team}/${week}`))
 		})
-		console.log('team Calls are ', teamCalls)
+		// console.log('team Calls are ', teamCalls)
 		axios.all(teamCalls)
 		.then(res => {
 			res.forEach(function(res){
