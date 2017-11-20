@@ -17,7 +17,7 @@ class Header extends Component {
 						</div>
 					</div>
 					<div className="header-links">
-						<Link to="/"><h3>Player Data</h3></Link>
+						<Link to="/players"><h3>Player Data</h3></Link>
 						<Link to="/teams"><h3>Team Data</h3></Link>
 						<Link to="/compare"><h3>Compare Players</h3></Link>
 						<Link to="/about"><h3>About Air Yards</h3></Link>

@@ -20,6 +20,57 @@ a {
 	color: white;
 }
 
+/*********************************** Landing Page **********************************/
+
+.landingContainer {
+	height: 100vh;
+	width: 100vw;
+	margin: 0;
+	border: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #7c9b59;
+}
+
+.landingHeader {
+	margin-top: 2%;
+	flex: 0.3;
+	width: 100%;
+	text-align: center;
+	color: white;
+}
+
+.landingHeader img {
+	margin-top: 2%;
+	height: 60px;
+	width: 60px;
+}
+
+.fantasyAir {
+	font-size: 64px;
+}
+
+.landingLinks {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	flex: 1;
+	text-align: center;
+	width: 100%;
+	font-size: 36px;
+}
+
+.landingSection p {
+	font-size: 16px;
+	color: white;
+}
+
+.landingLinks div {
+	width: 100%;
+}
+
 /*********************************** Header **********************************/
 
 .header-container {
@@ -175,8 +226,8 @@ margin-bottom: 2%;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	justify-content: space-around;
-	flex: 1;
+	/*justify-content: space-between;*/
+	/*flex: 1;*/
 }
 
 .playerHeader {
@@ -185,7 +236,7 @@ margin-bottom: 2%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	flex: 0.2;
+	/*flex: 0.2;*/
 }
 
 .playerHeader h1 {
@@ -200,9 +251,20 @@ margin-bottom: 2%;
 	width: 80vw;
 }
 
-.playerContainer .searchBar {
-	margin-right: 3%;
+.morePlayerSearch {
+		margin-bottom: 1%;
 }
+
+/*.search-container .SearchResults {
+		margin-top: 3%;
+    margin-right: 3%;
+    text-align: center;
+    width: 270px;
+    background: grey;
+    border-radius: 5px;
+    position: fixed;
+    z-index: 4;
+}*/
 
 /*.playerContainer .searchResults {
 	margin-right: 3%;
@@ -273,6 +335,15 @@ margin-bottom: 2%;
 	justify-content: flex-start;
 	margin-left: 15%;
 	flex: 0.5;
+}
+
+.compareContainer .searchBar {
+	margin-right: 2%;
+}
+
+.compareContainer .searchResults {
+	margin-right: 2%;
+	z-index: 4;
 }
 
 .search-player-container {

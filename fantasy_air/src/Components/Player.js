@@ -22,6 +22,7 @@ constructor(props){
 	this.renderMsChart = this.renderMsChart.bind(this);
 	this.renderTsChart = this.renderTsChart.bind(this);
 	this.renderRacrChart = this.renderRacrChart.bind(this);
+  this.clearPlayer = this.clearPlayer.bind(this);
 	console.log('props from cons', props);
 }
 
@@ -138,11 +139,17 @@ renderRacrChart(){
 		)
 }
 
+clearPlayer(){
+  this.setState({playerData: [], gotData: false});
+}
+
 render() {
 	return(
 		<div className="playerContainer">
 		<Header />
-		<Search />
+    <div className="morePlayerSearch">
+		<Search clear={this.clearPlayer} />
+    </div>
 		<div className="playerHeader">
 			<h1>{this.state.name} ‧ {this.state.pos} ‧ {this.state.team}</h1>
 		</div>

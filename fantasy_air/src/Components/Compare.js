@@ -15,7 +15,8 @@ constructor(props){
     searched: false,
     compare: false,
     comparePlayers: [],
-    compareTerm: 'air_yards'
+    compareTerm: 'air_yards1',
+    limit: false
 	}
 	this.handleChange = this.handleChange.bind(this);
   this.searchPlayers = this.searchPlayers.bind(this);
@@ -25,6 +26,7 @@ constructor(props){
   this.getSeasonStats = this.getSeasonStats.bind(this);
   this.renderCompareChart = this.renderCompareChart.bind(this);
   this.onChange = this.onChange.bind(this);
+  this.showLimitMessage = this.showLimitMessage.bind(this); 
 }
 
 componentDidMount(){
@@ -71,27 +73,36 @@ handleChange(event) {
 
   onClickPlayer(e){
   	e.preventDefault();
-  	const players = this.state.players
-  	if (players.length < 6) {
-  		players.push({name: e.target.getAttribute("name"), team: e.target.getAttribute("team"), pos: e.target.getAttribute("pos")})
+    console.log(this.state.players)
+  	if (this.state.players.length < 5) {
+  		this.state.players.push({name: e.target.getAttribute("name"), team: e.target.getAttribute("team"), pos: e.target.getAttribute("pos")})
   		this.setState({value: "", searchResults: [], searched: false})
   	}
+    else {
+      this.setState({limit: true}, this.showLimitMessage)
+    }
   	// console.log('selected player from onClick is ', e.target.getAttribute("name"), e.target.getAttribute("team") )
   	// console.log('players froms state are ', this.state.players)
+  }
+
+  showLimitMessage(){
+    return (
+      <p>Maximum number of players selected, click reset to start again.</p>
+      )
   }
 
  	renderSelectedPlayers(){
  		let renderPlayers = []
   	// console.log('players in render players are', this.state.players)
-  	if(this.state.players.length < 6){
+  	// if(this.state.players.length < 6){
   	this.state.players.map(e => {
   		renderPlayers.push(<p className="selectedPlayer" onClick={this.removePlayer}>{e.name} ‧ {e.pos} ‧ {e.team}</p>)
   		return renderPlayers
   		})
-  	}
-  	else if (this.state.players.length > 5) {
-	  	return renderPlayers
-  	}
+  	// }
+  	// else if (this.state.players.length > 5) {
+	  // 	return renderPlayers
+  	// }
   	return renderPlayers
   }
 
@@ -123,7 +134,8 @@ handleChange(event) {
 	    searched: false,
 	    compare: false,
 	    comparePlayers: [],
-	    compareTerm: 'air_yards'
+	    compareTerm: 'air_yards',
+      limit: false
   	})
   }
 
@@ -138,14 +150,19 @@ handleChange(event) {
   		let compareTerm = this.state.compareTerm
   		let compareData = this.state.compareData
   		compareData.forEach(function(compareDatum) {
-  				let stepValue = 0;
-  				if (compareTerm === undefined) {
-  					return 
+          let colorHash = ['#7c9b59', '#6F92BF']
+  				if (compareTerm === 'air_yards1') {
+  					let stepValue = compareDatum.air_yards
+            data.push({
+                    funnelKey: "#7c9b59",
+                    player: compareDatum.player_data[0].full_name, 
+                    air_yards: stepValue
+                 })
   				}
   				else if (compareTerm === 'air_yards') { 
   					let stepValue = compareDatum.air_yards
   					data.push({
-  									funnelKey: "#6290c3",
+  									funnelKey: "#7c9b59",
                     player: compareDatum.player_data[0].full_name, 
                     air_yards: stepValue
                  })
@@ -153,7 +170,7 @@ handleChange(event) {
   				else if (compareTerm === 'ms_air_yards') { 
   					let stepValue = compareDatum.ms_air_yards
   					data.push({
-  									funnelKey: "#6290c3",
+  									funnelKey: "#7c9b59",
                     player: compareDatum.player_data[0].full_name, 
                     air_yards: stepValue
                  })
@@ -161,7 +178,7 @@ handleChange(event) {
   				else if (compareTerm === 'aypt') { 
   					let stepValue = compareDatum.aypt
   					data.push({
-  									funnelKey: "#6290c3",
+  									funnelKey: "#7c9b59",
                     player: compareDatum.player_data[0].full_name, 
                     air_yards: stepValue
                  })
@@ -169,7 +186,7 @@ handleChange(event) {
   				else if (compareTerm === 'racr') { 
   					let stepValue = compareDatum.racr
   					data.push({
-  									funnelKey: "#6290c3",
+  									funnelKey: "#7c9b59",
                     player: compareDatum.player_data[0].full_name, 
                     air_yards: stepValue
                  })
@@ -177,7 +194,7 @@ handleChange(event) {
   				else if (compareTerm === 'target_share') { 
   					let stepValue = compareDatum.target_share
   					data.push({
-  									funnelKey: "#6290c3",
+  									funnelKey: "#7c9b59",
                     player: compareDatum.player_data[0].full_name, 
                     air_yards: stepValue
                  })
@@ -199,14 +216,14 @@ handleChange(event) {
             rAccessor={"air_yards"}
             style={d => {return { fill: d.funnelKey, stroke: 'darkgray', strokeWidth: 1 }}}
             type={"bar"}
-            oLabel={true}
+            // oLabel={true}
             pieceHoverAnnotation={true}
             oLabel={d => (
               <text transform="translate(-15,0)rotate(45)">{d}</text>
             )}
             axis={ {margin: 10, orient: "left", label: `${compareTerm}` } } 
             margin={{ left: 60, top: 60, bottom: 60, right: 100 }}
-            oPadding={5}
+            oPadding={15}
           /> 
 			    )
   }
@@ -224,6 +241,7 @@ render() {
 			
 			<div className="selectPlayersContainer"> 
 				<div className="selectedPlayers"> 
+          {this.state.limit && this.showLimitMessage()}
 					<div className="selectedPlayersHead">Selected Players (Up to 5)</div>
 						{this.renderSelectedPlayers()}
 				</div>

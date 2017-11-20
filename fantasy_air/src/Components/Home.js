@@ -9,6 +9,7 @@ import Team from './Team.js';
 import Compare from './Compare.js';
 import About from './About.js';
 import Player from './Player.js';
+import Landing from './Landing.js';
 
 class Home extends Component {
 
@@ -24,7 +25,8 @@ class Home extends Component {
   renderView(){
     return(
       <Switch>
-        <Route exact path="/" render={props => (<Playertable url={this.state.url}/>)}/>
+        <Route exact path="/" render={props => (<Landing url={this.state.url}/>)}/>
+        <Route path="/players" render={props => (<Playertable url={this.state.url}/>)}/>
         <Route path="/teams" render={props => (<Team url={this.state.url} />)}/>
         <Route path="/compare" render={props => (<Compare url={this.state.url}/>)}/>
         <Route path="/player/:full_name/:team" render={props => (<Player routeProps={props}/>)}/>
