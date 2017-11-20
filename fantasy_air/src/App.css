@@ -254,20 +254,25 @@ margin-bottom: 2%;
 
 .selectPlayersContainer {
 	/*border: 1px solid black;*/
-	flex: 0.3;
+	flex: 0.4;
 	display: flex;
 	flex-direction: column;
 }
 
 .selectedPlayers {
 	/*border: 1px solid orange;*/
-	height: 70%;
+	height: 50%;
 	margin-bottom: 5%;
 }
 
 .compareChartContainer {
-	border: 1px solid green;
-	flex: 1;
+/*	border-left: 1px solid black;
+	border-bottom: 1px solid black;*/
+	margin-bottom: 10%;
+	display: flex;
+	justify-content: flex-start;
+	margin-left: 15%;
+	flex: 0.5;
 }
 
 .search-player-container {
@@ -299,3 +304,13 @@ margin-bottom: 2%;
 	border: solid 1px #979797;
 }
 
+.statSelect {
+	width: 100px;
+	align-self: center;
+	margin-bottom: 5%;
+}
+
+.placeholderText {
+	align-self: center;
+	font-size: 36px;
+}

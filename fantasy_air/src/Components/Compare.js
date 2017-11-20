@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import { Link } from 'react-router-dom';
+import { ORFrame } from 'semiotic';
 
 import Header from './Header.js';
-// import Search from './Search.js';
 
 class Comapre extends Component {
 
@@ -14,7 +13,9 @@ constructor(props){
 		value: "",
     searchResults: [],
     searched: false,
-    comparePlayers: []
+    compare: false,
+    comparePlayers: [],
+    compareTerm: 'air_yards'
 	}
 	this.handleChange = this.handleChange.bind(this);
   this.searchPlayers = this.searchPlayers.bind(this);
@@ -22,6 +23,8 @@ constructor(props){
   this.renderSelectedPlayers = this.renderSelectedPlayers.bind(this);
   this.reset = this.reset.bind(this);
   this.getSeasonStats = this.getSeasonStats.bind(this);
+  this.renderCompareChart = this.renderCompareChart.bind(this);
+  this.onChange = this.onChange.bind(this);
 }
 
 componentDidMount(){
@@ -44,7 +47,7 @@ handleChange(event) {
     axios.get(`${this.props.url}/players/${this.state.value}`)
     .then(res => {
       this.setState({searchResults: res.data})
-      console.log('search results are ', res.data);
+      // console.log('search results are ', res.data);
       })
     }
   }
@@ -79,7 +82,7 @@ handleChange(event) {
 
  	renderSelectedPlayers(){
  		let renderPlayers = []
-  	console.log('players in render players are', this.state.players)
+  	// console.log('players in render players are', this.state.players)
   	if(this.state.players.length < 6){
   	this.state.players.map(e => {
   		renderPlayers.push(<p className="selectedPlayer" onClick={this.removePlayer}>{e.name} ‧ {e.pos} ‧ {e.team}</p>)
@@ -93,6 +96,7 @@ handleChange(event) {
   }
 
   getSeasonStats(){
+  	console.log('stat in getSeasonStats is ', this.state.compareTerm)
   	let playerCalls = [];
   	let playerData = [];
   	const url = this.props.url;
@@ -107,7 +111,7 @@ handleChange(event) {
 				playerData.push(res.data)
 				})
 				console.log('playerData outside of axios.all is ', playerData)
-				this.setState({ compareData: playerData })
+				this.setState({ compareData: playerData, compare: true })
 			})
   }
 
@@ -115,9 +119,96 @@ handleChange(event) {
   	this.setState({
   		players: [],
 			value: "",
-    	searchResults: [],
-    	searched: false
+	    searchResults: [],
+	    searched: false,
+	    compare: false,
+	    comparePlayers: [],
+	    compareTerm: 'air_yards'
   	})
+  }
+
+  onChange(e){
+  	this.setState({
+      [e.target.name]: e.target.value
+		})
+  }
+
+  renderCompareChart(){
+  		const data = []; 
+  		let compareTerm = this.state.compareTerm
+  		let compareData = this.state.compareData
+  		compareData.forEach(function(compareDatum) {
+  				let stepValue = 0;
+  				if (compareTerm === undefined) {
+  					return 
+  				}
+  				else if (compareTerm === 'air_yards') { 
+  					let stepValue = compareDatum.air_yards
+  					data.push({
+  									funnelKey: "#6290c3",
+                    player: compareDatum.player_data[0].full_name, 
+                    air_yards: stepValue
+                 })
+  				}
+  				else if (compareTerm === 'ms_air_yards') { 
+  					let stepValue = compareDatum.ms_air_yards
+  					data.push({
+  									funnelKey: "#6290c3",
+                    player: compareDatum.player_data[0].full_name, 
+                    air_yards: stepValue
+                 })
+  				}
+  				else if (compareTerm === 'aypt') { 
+  					let stepValue = compareDatum.aypt
+  					data.push({
+  									funnelKey: "#6290c3",
+                    player: compareDatum.player_data[0].full_name, 
+                    air_yards: stepValue
+                 })
+  				}
+  				else if (compareTerm === 'racr') { 
+  					let stepValue = compareDatum.racr
+  					data.push({
+  									funnelKey: "#6290c3",
+                    player: compareDatum.player_data[0].full_name, 
+                    air_yards: stepValue
+                 })
+  				}
+  				else if (compareTerm === 'target_share') { 
+  					let stepValue = compareDatum.target_share
+  					data.push({
+  									funnelKey: "#6290c3",
+                    player: compareDatum.player_data[0].full_name, 
+                    air_yards: stepValue
+                 })
+  				}
+  			// console.log('compareTerm inside forEach is ', compareTerm)
+  			// console.log('compareDatum is ', compareDatum)
+  			// const stepValue = compareDatum[compareTerm]
+  			// console.log('compare term value is ', compareDatum.compareTerm)
+  		})
+
+  		console.log('compare data in renderCompareChart is ', data)
+
+				return (
+					<ORFrame
+						title={`Season Comparison`}
+            size={[600, 600]}
+            data={data}
+            oAccessor={"player"}
+            rAccessor={"air_yards"}
+            style={d => {return { fill: d.funnelKey, stroke: 'darkgray', strokeWidth: 1 }}}
+            type={"bar"}
+            oLabel={true}
+            pieceHoverAnnotation={true}
+            oLabel={d => (
+              <text transform="translate(-15,0)rotate(45)">{d}</text>
+            )}
+            axis={ {margin: 10, orient: "left", label: `${compareTerm}` } } 
+            margin={{ left: 60, top: 60, bottom: 60, right: 100 }}
+            oPadding={5}
+          /> 
+			    )
   }
 
 
@@ -133,15 +224,30 @@ render() {
 			
 			<div className="selectPlayersContainer"> 
 				<div className="selectedPlayers"> 
-					<div className="selectedPlayersHead">Selected Players To (Up to 5)</div>
+					<div className="selectedPlayersHead">Selected Players (Up to 5)</div>
 						{this.renderSelectedPlayers()}
+				</div>
+				<div className="statSelect">
+				<label htmlFor='statSelect'>Compare On:</label><br></br>
+				<select className='select-values' id='statSelector' name='compareTerm' value={this.state.compareTerm} onChange={this.onChange}>
+						<option defaultValue='air_yards'>Air Yards</option>
+						 <option value='aypt'>AYPT</option>
+						 <option value='racr'>RACR</option>
+						 <option value='ms_air_yards'>MS Air Yards</option>
+						 <option value='target_share'>Target Share</option>
+				</select>
 				</div>
 				<button onClick={this.getSeasonStats} className="compareButton"> Compare Players </button><br></br>
 				<button onClick={this.reset} className="compareButton"> Reset </button>
 			</div>
 			
 			<div className="compareChartContainer"> 
-
+				{this.state.compare && 
+					this.renderCompareChart()}
+				{
+					this.state.compare !== true && 
+					<div className="placeholderText">No players selected</div>
+				}
 			</div>
 
 		</div>
