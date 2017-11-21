@@ -17,7 +17,7 @@ render() {
 				<div className='aboutAllStats'>
 						<div className="aboutOneStat">
 							<h3>Air Yards</h3>
-							<p> Definition: Air yards measure receivers volumne or opportunity. Think of it this way, the higher the volume, the more likely a player is to turn that volume into fantasy points.</p>
+							<p> Definition: Air yards measure receivers volume or opportunity. Think of it this way, the higher the volume, the more likely a player is to turn that volume into fantasy points.</p>
 							<p> Use it in a sentance: Wow, Alshon Jeffery has a TON of Air Yards but isn't converting them at a high rate. I wonder if he is a buy low candidate. </p>
 							<p> Fly like a champion: Look for players with high air yards but make sure they have a high RACR as well. That means they're converting air yards to receiving yards at a high rate. Antyhing over 1 is great in this category. Especially for WR or TE. RB usually have a higher RACR. </p>
 						</div>

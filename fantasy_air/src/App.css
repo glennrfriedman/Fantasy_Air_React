@@ -227,7 +227,7 @@ margin-bottom: 2%;
 	flex-direction: column;
 	align-items: flex-start;
 	/*justify-content: space-between;*/
-	/*flex: 1;*/
+	flex: 1;
 }
 
 .playerHeader {
@@ -253,6 +253,10 @@ margin-bottom: 2%;
 
 .morePlayerSearch {
 		margin-bottom: 1%;
+}
+
+.morePlayerSearch .search-container {
+	width: 95vw;
 }
 
 /*.search-container .SearchResults {
@@ -309,18 +313,25 @@ margin-bottom: 2%;
 
 .comparePlayersContainer {
 	display: flex;
-	flex-direction: row;
-	height: 70vh;
-	margin: 2%;
+	flex-direction: column;
 }
 
 .statDesc {
-	flex: 0.2;
+	margin-top: 2%;
+	margin-left: 2%;
+	font-size: 16px;
+}
+
+.compareGraphContainer {
+	margin-top: 2%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .compareContainer .search-container {
-    flex-direction: column;
-    position: relative;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
 }
 
@@ -336,33 +347,35 @@ margin-bottom: 2%;
 	z-index: 4;
 	color: white;
 	position: absolute;
-	margin-top: 72px;
 	border: 0;
 	padding: 0;
 }
 
 .selectPlayersContainer {
-	flex: 0.3;
 	display: flex;
-	flex-direction: column;
-	margin-left: 4%;
+	flex-direction: row;
+	flex: 0.3;
+	align-items: center;
+	margin-left: 5%;
 }
 
-.selectPlayersContainer .select-values {
+/*.selectPlayersContainer .select-values {
     width: 100px;
+ }*/
+
+ #statSelector {
+ 	  margin: 0px 10px;
+    width: 120px;
+    height: 30px;
  }
 
 .selectedPlayers {
-	height: 50%;
+	height: 400px;
 	margin-bottom: 5%;
 }
 
 .compareChartContainer {
-	margin-bottom: 10%;
-	display: flex;
-	justify-content: flex-start;
-	margin-left: 2%;
-	flex: 0.7;
+	flex: 1;
 }
 
 
@@ -458,4 +471,99 @@ margin-bottom: 2%;
 	font-weight: bold;
 }
 
+/************************************* Mobile **********************************************/
+
+@media only screen and (max-width: 500px) {
+	/* Mobile Header */
+	.header-container {
+		flex-direction: column;
+		align-items: center;
+	}
+	.logo {
+		flex-direction: column;
+	}
+	.header-links {
+		width: 100vw;
+	}
+	/*Mobile Sub Header */
+	.subHeader {
+		flex-direction: column;
+	}
+	.viewSelect {
+		flex-direction: column;
+	}
+	.viewSelect-item label {
+		font-size: 18px;
+	}
+	.viewSelect-item {
+		margin: 5px 0px;
+	}
+	.search-container {
+		display: flex;
+		align-items: center;
+		margin-top: 10px;
+	}
+	/* Mobile Compare Players */
+	.comparePlayersContainer {
+		height: 100vh;
+		flex-direction: column;
+		margin: 0;
+	}
+
+	.compareContainer {
+		max-width: 100vw;
+		min-width: 100vw;
+	}
+
+	.compareContainer .search-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+	}
+
+	.compareGraphContainer {
+		display: flex;
+		flex-direction: column;
+		align-self: center;
+	}
+
+	.selectPlayersContainer {
+			display: block; 
+	}
+
+	.compareChartContainer {
+		display: inline-block;
+    left: 0;
+    margin-right: 100%;
+    max-height: 5px;
+    max-width: 5px;
+	}
+
+	canvas.frame-canvas {
+		width: 300;
+	}
+
+	.playerGraphContainer {
+		flex-direction: column;
+		margin-left: 8%;
+	}
+
+	.playerHeader h1 {
+		display: flex;
+		margin-top: 20px;
+		align-self: center;
+		font-size: 30px;
+	}
+	
+	.searchResults {
+		margin-top: 12%;
+	}
+
+/*	.statSelect {
+		display: flex;
+		flex-direction: column;
+	}*/
+
+}
 

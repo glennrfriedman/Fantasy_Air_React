@@ -14,7 +14,7 @@ class Player extends Component {
 constructor(props){
 	super(props)
 	this.state = {
-		url: "http://localhost:3000",
+		url: "https://warm-cliffs-55595.herokuapp.com",
 		playerData: [],
 		gotData: false
 	}

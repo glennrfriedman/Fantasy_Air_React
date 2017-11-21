@@ -18,7 +18,7 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      url: "http://localhost:3000",
+      url: "https://warm-cliffs-55595.herokuapp.com",
     }
   }
 

@@ -29,10 +29,6 @@ constructor(props){
   this.showLimitMessage = this.showLimitMessage.bind(this); 
 }
 
-componentDidMount(){
-
-}
-
 handleChange(event) {
     event.preventDefault();
     this.setState({
@@ -63,7 +59,7 @@ handleChange(event) {
     else {
       results.map(e => {
         renderSearch.push(    
-          <div className="playerLink"> <div onClick={this.onClickPlayer} name={e[0]} team={e[1]} pos={e[2]} >{e[0]} ‧ {e[2]} ‧ {e[1]}</div> </div>
+          <div key={Math.random()} className="playerLink"> <div onClick={this.onClickPlayer} name={e[0]} team={e[1]} pos={e[2]} >{e[0]} ‧ {e[2]} ‧ {e[1]}</div> </div>
           )
         return renderSearch
       })
@@ -96,7 +92,7 @@ handleChange(event) {
   	// console.log('players in render players are', this.state.players)
   	// if(this.state.players.length < 6){
   	this.state.players.map(e => {
-  		renderPlayers.push(<p className="selectedPlayer" onClick={this.removePlayer}>{e.name} ‧ {e.pos} ‧ {e.team}</p>)
+  		renderPlayers.push(<p key={Math.random()} className="selectedPlayer" onClick={this.removePlayer}>{e.name} ‧ {e.pos} ‧ {e.team}</p>)
   		return renderPlayers
   		})
   	// }
@@ -107,7 +103,7 @@ handleChange(event) {
   }
 
   getSeasonStats(){
-  	console.log('stat in getSeasonStats is ', this.state.compareTerm)
+  	// console.log('stat in getSeasonStats is ', this.state.compareTerm)
   	let playerCalls = [];
   	let playerData = [];
   	const url = this.props.url;
@@ -151,7 +147,6 @@ handleChange(event) {
   		let compareData = this.state.compareData
       // console.log('compare data is ', compareData)
   		compareData.forEach(function(compareDatum) {
-          let colorHash = ['#7c9b59', '#6F92BF']
   				if (compareTerm === 'air_yards') {
   					let stepValue = compareDatum.air_yards
             data.push({
@@ -219,7 +214,7 @@ handleChange(event) {
 				return (
 					<ORFrame
 						title={`Season Comparison`}
-            size={[800, 500]}
+            size={[650, 500]}
             data={data}
             oAccessor={"player"}
             rAccessor={"air_yards"}
@@ -243,43 +238,32 @@ render() {
 	return(
 		<div className="compareContainer">
 		<Header />
-		 <div className="search-container">
+    <div className="comparePlayersContainer">
+		<div className="search-container">
         <div className="addLabel">Add Players:</div>
+        <div>
         <input className='searchBar' type='text' ref={el=>{this.search=el}} placeholder="  Search Players to Compare (Click to Select)" onChange={this.handleChange} />
         <div className="compareResults"> {this.state.searched && this.displayPlayerResults()} </div>
+        </div>
+        <button onClick={this.getSeasonStats} className="compareButton"> Compare Players </button><br></br>
+        <button onClick={this.reset} className="compareButton"> Reset </button>
+        <select className='select-values' id='statSelector' name='compareTerm' value={this.state.compareTerm} onChange={this.onChange}>
+             <option value='air_yards'>Air Yards</option>
+             <option value='aypt'>AYPT</option>
+             <option value='racr'>RACR</option>
+             <option value='ms_air_yards'>MS Air Yards</option>
+             <option value='target_share'>Target Share</option>
+             <option value='wopr'>WOPR</option>
+        </select>
     </div>
-		<div className="comparePlayersContainer">
-			
-			<div className="selectPlayersContainer"> 
+    <div className="compareGraphContainer"> 			
+		<div className="selectPlayersContainer"> 
 				<div className="selectedPlayers"> 
 					<div className="selectedPlayersHead">Selected Players (Up to 5)</div>
-						{this.renderSelectedPlayers()}
-				</div>
-				<div className="statSelect">
-				<div>Compare On:</div>
-				<select className='select-values' id='statSelector' name='compareTerm' value={this.state.compareTerm} onChange={this.onChange}>
-						 <option value='air_yards'>Air Yards</option>
-						 <option value='aypt'>AYPT</option>
-						 <option value='racr'>RACR</option>
-						 <option value='ms_air_yards'>MS Air Yards</option>
-						 <option value='target_share'>Target Share</option>
-             <option value='wopr'>WOPR</option>
-				</select>
-				</div>
-				<button onClick={this.getSeasonStats} className="compareButton"> Compare Players </button><br></br>
-				<button onClick={this.reset} className="compareButton"> Reset </button>
-			 </div>
-			
-			<div className="compareChartContainer"> 
-				{this.state.compare && 
-					this.renderCompareChart()}  
-				{this.state.compare !== true && 
-					<div className="placeholderText">Search and add players to compare</div>}
-			</div>
-
-      <div className="statDesc">
-       {this.state.compare && this.state.compareTerm === 'air_yards' &&
-          <div>Air yards measure receivers volumne or opportunity. Think of it this way, the higher the volume, the more likely a player is to turn that volume into fantasy points.</div>}
+					{this.renderSelectedPlayers()}
+                <div className="statDesc">
+        {this.state.compare && this.state.compareTerm === 'air_yards' &&
+          <div>Air yards measure receivers volume or opportunity. Think of it this way, the higher the volume, the more likely a player is to turn that volume into fantasy points.</div>}
         {this.state.compare && this.state.compareTerm === 'aypt' &&
           <div>Air yards per target is an average measure of how deep down field a receiver is targeted. For example, if a player has an AYPT of 21 that means he is a deep threat, and sees a lot of opportunity to make big plays.</div>}
         {this.state.compare && this.state.compareTerm === 'racr' &&
@@ -291,9 +275,16 @@ render() {
         {this.state.compare && this.state.compareTerm === 'wopr' &&
           <div>WOPR allows us to compare slot receivers who get lots of targets but not a lot of air yards with players who receive fewer targets but a greater share of the team’s air yards. WOPR takes share of team air yards and share of team targets and weights them based on how well they predict both PPR and standard fantasy points.</div>}
       </div>
-
+				</div>
 		</div>
-		
+	  <div className="compareChartContainer"> 
+				{this.state.compare && 
+					this.renderCompareChart()}  
+				{this.state.compare !== true && 
+					<div className="placeholderText">Search and add players to compare</div>}
+			</div>
+    </div>
+		</div>
 		</div>
 		)
 }

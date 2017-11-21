@@ -12,7 +12,7 @@ constructor(props){
     this.state = {
       value: "",
       searchResults: [],
-      url: "http://localhost:3000",
+      url: "https://warm-cliffs-55595.herokuapp.com",
       searched: false
     }
 
@@ -36,7 +36,7 @@ constructor(props){
     axios.get(`${this.state.url}/players/${this.state.value}`)
     .then(res => {
       this.setState({searchResults: res.data})
-      console.log('search results are ', res.data);
+      // console.log('search results are ', res.data);
       })
     }
   }
