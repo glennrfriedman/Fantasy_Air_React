@@ -1,8 +1,9 @@
 # Fantasy Air
 
-## Check it out for yourself, new to fantasy football? See the About section.
-
+Check it out for yourself, new to fantasy football? See the About section.
 www.fantasyair.co
+
+## Photos
 
 ![alt text](./home.png)
 ![alt text](./odell.png)
@@ -38,7 +39,7 @@ Fantasy Air was born from an idea after a friend showed me the JSON dataset over
 From funny idea to actual app, Fantasy Air was designed with designs and users in mind. I branched out from the usual pen and paper wireframes and graduated to Sketch. Sketch is a great tool and without it Fantasy Air wouldn't have been possible. See wireframes below. 
 
 ![alt text](./Fantasy Air Signup.jpg)
-![alt text](./Fantasy Mock Up.jpg)
+![alt text](./Fantasy Air Mock Up.jpg)
 ![alt text](./player.png)
 
 From there I built out the back-end, or enough if it to get going on the front-end. Once the two parts were talking to each other I really built it out piece-meal thinking about what I would need from the back end and in what order I would need it to get and show the data. 
