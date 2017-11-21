@@ -34,19 +34,21 @@ As a fantasy football pro, I want a state of the art tool that will allow me to 
 
 ## Approach 
 
-Fantasy Air was born from an idea after a friend showed me the JSON dataset over drinks. He was actually giving me a hard time about my fantasy teams performance and said I should analyze the data and learn something to make my team better. 
+Fantasy Air was born after a friend showed me the JSON dataset over drinks. He was actually giving me a hard time about my fantasy team's performance and said I should analyze the data and learn something to make my team better. 
 
-From funny idea to actual app, Fantasy Air was designed with designs and users in mind. I branched out from the usual pen and paper wireframes and graduated to Sketch. Sketch is a great tool and without it Fantasy Air wouldn't have been possible. See wireframes below. 
+From funny idea to actual app, Fantasy Air was designed with functionality and users in mind. I branched out from the usual pen and paper wireframes and graduated to Sketch. Sketch is a great tool and without it Fantasy Air wouldn't have been possible. 
 
-![alt text](./Fantasy Air Signup.jpg)
-![alt text](./Fantasy Air Mock Up.jpg)
+See wireframes below:
+
+![alt text](./fantasy_air_signup.jpg)
+![alt text](./fantasy_air_mock.jpg)
 ![alt text](./player.png)
 
-From there I built out the back-end, or enough if it to get going on the front-end. Once the two parts were talking to each other I really built it out piece-meal thinking about what I would need from the back end and in what order I would need it to get and show the data. 
+Once I completed the design, I built out the back-end, or enough of if it to get going on the front-end. Once the two parts were talking to each other I really built it out piece-meal thinking about what I would need from the back end and in what order I would need it to get and show the data. 
 
-Since the API only serves weekly data for one player all aggregation had to be done on the back-end. This was GREAT using active record with a postgresql database in Rails. I found the commands intuitive and once I got the hang of them I could aggregate player stats for the season, team stats, dynamically query the full_name column of the Player table to return top 5 results, and more!
+Since the API only serves weekly data for one player all aggregation had to be done on the back-end. This was GREAT using active record with a postgresql database in Rails. I found the commands intuitive and once I got the hang of them I could aggregate player stats, team stats, dynamically query the full_name column of the Player table to return top 5 results, and more!
 
-Lastly, once I had all of the data I wanted on the front-end I really focussed on data-visualizations and spent almost 2 full days working through Semiotic and React-table packages to show the data I wanted where and how I wanted it. If I could do it over again...not sure I would have used the Semiotics due to the difficulty in maniuplating SVGs in CSS. 
+Lastly, once I had all of the data I wanted on the front-end I really focussed on data-visualizations and spent a lot of time working through Semiotic and React-table packages to show the data I wanted where and how I wanted it. If I could do it over again...not sure I would have used the Semiotics due to the difficulty in maniuplating SVGs in CSS. 
 
 ## Wish List 
 
